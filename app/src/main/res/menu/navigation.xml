@@ -3,14 +3,14 @@
 
     <item
         android:id="@+id/places_list"
-        android:title="@string/title_home" />
+        android:title="@string/title_list" />
 
     <item
         android:id="@+id/places_map"
-        android:title="@string/title_dashboard" />
+        android:title="@string/title_map" />
 
     <item
         android:id="@+id/profile"
-        android:title="@string/title_notifications" />
+        android:title="@string/title_profile" />
 
 </menu>

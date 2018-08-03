@@ -6,12 +6,16 @@ import android.os.Looper;
 import android.support.annotation.NonNull;
 
 import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.sdmitriy.firebasetestapp.LoginActivity;
+import com.sdmitriy.firebasetestapp.PartOneActivity;
+import com.sdmitriy.firebasetestapp.entity.UserData;
 import com.sdmitriy.firebasetestapp.util.Constants;
+import com.sdmitriy.firebasetestapp.util.Utils;
 
 public class LoginActivityPresenter implements GoogleApiClient.OnConnectionFailedListener {
 
@@ -53,8 +57,25 @@ public class LoginActivityPresenter implements GoogleApiClient.OnConnectionFaile
     public void onActivityResultCallback(int requestCode, Intent data) {
         if (requestCode == Constants.SIGN_IN_RESULT) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-            //todo save result to db
+            handleSignInResult(result);
         }
+    }
+
+    private void handleSignInResult(GoogleSignInResult result) {
+        if (result.isSuccess()) {
+            GoogleSignInAccount account = result.getSignInAccount();
+            if (account != null) {
+                UserData userData = new UserData(account.getEmail(), account.getId());
+                Utils.saveUserDataToSharedPreferences(userData, activity);
+            }
+            startMainActivity();
+        }
+    }
+
+    private void startMainActivity() {
+        Intent intent = new Intent(activity, PartOneActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        activity.startActivity(intent);
     }
 
     @Override

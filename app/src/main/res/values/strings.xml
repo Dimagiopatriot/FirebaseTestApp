@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">FirebaseTestApp</string>
     <string name="title_activity_part_one">PartOneActivity</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_list">Список</string>
+    <string name="title_map">Карта</string>
+    <string name="title_profile">Профиль</string>
+
+    <string name="no_items_message">НЕТ НИ ОДНОЙ ТОЧКИ</string>
 </resources>

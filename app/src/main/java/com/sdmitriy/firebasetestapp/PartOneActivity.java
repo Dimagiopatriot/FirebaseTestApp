@@ -1,30 +1,37 @@
 package com.sdmitriy.firebasetestapp;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
+
+import com.sdmitriy.firebasetestapp.fragment.MapFragment;
+import com.sdmitriy.firebasetestapp.fragment.PlacesListFragment;
+import com.sdmitriy.firebasetestapp.fragment.ProfileFragment;
+import com.sdmitriy.firebasetestapp.util.Utils;
 
 import butterknife.BindView;
+
+import static com.sdmitriy.firebasetestapp.util.Constants.Tags.*;
 
 public class PartOneActivity extends AppCompatActivity {
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.places_list:
-                    return true;
-                case R.id.places_map:
-                    return true;
-                case R.id.profile:
-                    return true;
-            }
-            return false;
+            = item -> {
+        switch (item.getItemId()) {
+            case R.id.places_list:
+                Utils.navigateToFragment(this, new PlacesListFragment(),
+                        R.id.main_activity_container, PLACES_FRAGMENT);
+                return true;
+            case R.id.places_map:
+                Utils.navigateToFragment(this, new MapFragment(),
+                        R.id.main_activity_container, MAP_FRAGMENT);
+                return true;
+            case R.id.profile:
+                Utils.navigateToFragment(this, new ProfileFragment(),
+                        R.id.main_activity_container, PROFILE_FRAGMENT);
+                return true;
         }
+        return false;
     };
 
     @BindView(R.id.navigation)

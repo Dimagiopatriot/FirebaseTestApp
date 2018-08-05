@@ -1,4 +1,4 @@
-package com.sdmitriy.firebasetestapp.entity;
+package com.sdmitriy.firebasetestapp.model.entity;
 
 public class UserData {
 

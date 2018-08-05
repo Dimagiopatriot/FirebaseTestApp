@@ -2,13 +2,12 @@ package com.sdmitriy.firebasetestapp.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
-import com.sdmitriy.firebasetestapp.entity.UserData;
+import com.sdmitriy.firebasetestapp.model.entity.UserData;
 
 import static com.sdmitriy.firebasetestapp.util.Constants.SharedConstants.*;
 

@@ -13,7 +13,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.sdmitriy.firebasetestapp.LoginActivity;
 import com.sdmitriy.firebasetestapp.PartOneActivity;
-import com.sdmitriy.firebasetestapp.entity.UserData;
+import com.sdmitriy.firebasetestapp.model.entity.UserData;
 import com.sdmitriy.firebasetestapp.util.Constants;
 import com.sdmitriy.firebasetestapp.util.Utils;
 

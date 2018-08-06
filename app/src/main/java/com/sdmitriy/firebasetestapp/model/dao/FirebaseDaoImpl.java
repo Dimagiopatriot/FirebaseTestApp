@@ -1,12 +1,8 @@
 package com.sdmitriy.firebasetestapp.model.dao;
 
-import android.support.v7.widget.RecyclerView;
-
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.sdmitriy.firebasetestapp.model.adapter.Adapter;
-import com.sdmitriy.firebasetestapp.model.adapter.CommonRecyclerViewAdapter;
-import com.sdmitriy.firebasetestapp.model.adapter.FirebasePlaceListAdapter;
 import com.sdmitriy.firebasetestapp.model.entity.Place;
 import com.sdmitriy.firebasetestapp.util.Constants;
 
@@ -26,8 +22,6 @@ public class FirebaseDaoImpl implements FirebaseDao {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         reference = database.getReference();
     }
-
-    private CommonRecyclerViewAdapter<Place, FirebasePlaceListAdapter.Holder> listAdapter;
 
     @Override
     public void addPlaceToFirebase(Place place) {

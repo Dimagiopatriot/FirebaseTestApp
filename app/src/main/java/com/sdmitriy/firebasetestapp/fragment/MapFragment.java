@@ -1,5 +1,6 @@
 package com.sdmitriy.firebasetestapp.fragment;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -7,10 +8,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.sdmitriy.firebasetestapp.R;
 import com.sdmitriy.firebasetestapp.model.adapter.MapAdapter;
@@ -20,15 +23,14 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
+public class MapFragment extends Fragment implements OnMapReadyCallback,
+        GoogleMap.OnMarkerClickListener, GoogleMap.OnMapLongClickListener {
 
     private Unbinder unbinder;
     private MapFragmentPresenter presenter;
 
     @BindView(R.id.map)
     MapView mapView;
-
-    private GoogleMap map;
 
     public static MapFragment getInstance(Bundle args) {
         MapFragment instance = new MapFragment();
@@ -69,7 +71,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     public void onDestroyView() {
         unbinder.unbind();
         presenter.disconnectGoogleApiClient();
-        mapView.onDestroy();
         super.onDestroyView();
     }
 
@@ -82,17 +83,34 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     @Override
     public boolean onMarkerClick(Marker marker) {
 
+        presenter.showHideInfoWindow(marker);
         return false;
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        map = googleMap;
-        map.getUiSettings().setMyLocationButtonEnabled(false);
-        map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        googleMap.getUiSettings().setMyLocationButtonEnabled(false);
+        googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
-        presenter.setMapAdapter(new MapAdapter(map));
+        presenter.setMapAdapter(new MapAdapter(googleMap));
         presenter.onGoogleMapReady();
-        map.setOnMarkerClickListener(this);
+        googleMap.setOnMarkerClickListener(this);
+        googleMap.setOnMapLongClickListener(this);
+    }
+
+    @Override
+    public void onMapLongClick(LatLng latLng) {
+        LayoutInflater inflater = LayoutInflater.from(getContext());
+        View dialogView = inflater.inflate(R.layout.dialog_save_place, null);
+        EditText placeName = dialogView.findViewById(R.id.place_name);
+
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(getContext())
+                .setView(dialogView)
+                .setTitle("Enter place name")
+                .setPositiveButton("OK", (dialog, which) ->
+                        presenter.savePlaceToDatabase(latLng, placeName.getText().toString()))
+                .setNegativeButton("Cancel", (dialog, which) -> {});
+        AlertDialog alertDialog = alertBuilder.create();
+        alertDialog.show();
     }
 }

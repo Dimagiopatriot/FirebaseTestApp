@@ -49,11 +49,16 @@ public class Utils {
         editor.apply();
     }
 
-    public static UserData getUserDataFromSharedPreferences(Context context) {
+    private static UserData getUserDataFromSharedPreferences(Context context) {
         SharedPreferences preferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
 
         String email = preferences.getString(USER_EMAIL, "");
         String id = preferences.getString(USER_ID, "");
         return new UserData(email, id);
+    }
+
+    public static boolean isUserLoggedOn(Context context) {
+        UserData userData = getUserDataFromSharedPreferences(context);
+        return !userData.getEmail().equals("") && !userData.getUserId().equals("");
     }
 }

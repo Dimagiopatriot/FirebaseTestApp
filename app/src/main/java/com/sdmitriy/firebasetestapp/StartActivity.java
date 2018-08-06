@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.sdmitriy.firebasetestapp.util.Utils;
+
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -19,7 +21,12 @@ public class StartActivity extends AppCompatActivity {
 
     @OnClick(R.id.part_one_button)
     public void goToPartOne(){
-        Intent intent = new Intent(this, LoginActivity.class);
+        Intent intent;
+        if (Utils.isUserLoggedOn(this)){
+            intent = new Intent(this, PartOneActivity.class);
+        } else {
+            intent = new Intent(this, LoginActivity.class);
+        }
         startActivity(intent);
     }
 

@@ -3,10 +3,8 @@ package com.sdmitriy.firebasetestapp.presenter;
 import android.location.Location;
 import android.os.Bundle;
 
-import com.google.android.gms.maps.CameraUpdate;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.sdmitriy.firebasetestapp.fragment.MapFragment;
 import com.sdmitriy.firebasetestapp.model.adapter.MapAdapter;
 import com.sdmitriy.firebasetestapp.model.dao.FirebaseDao;
@@ -20,8 +18,10 @@ public class MapFragmentPresenter {
     private MapFragment fragment;
     private LocationHelper locationHelper;
     private MapAdapter mapAdapter;
+    private FirebaseDao dao;
 
     private Place concretePlace;
+    private Marker previousMarker;
 
     public MapFragmentPresenter(MapFragment mapFragment) {
         this.fragment = mapFragment;
@@ -43,7 +43,7 @@ public class MapFragmentPresenter {
         } else if (concretePlace != null) {
             mapAdapter.moveCameraToPosition(concretePlace.getLatitude(), concretePlace.getLongitude());
         }
-        FirebaseDao dao = FirebaseDaoImpl.getInstance();
+        dao = FirebaseDaoImpl.getInstance();
         dao.getPlaceListFromFirebase(mapAdapter);
     }
 
@@ -68,5 +68,14 @@ public class MapFragmentPresenter {
 
     public void setMapAdapter(MapAdapter mapAdapter) {
         this.mapAdapter = mapAdapter;
+    }
+
+    public void showHideInfoWindow(Marker marker) {
+        //todo realize
+    }
+
+    public void savePlaceToDatabase(LatLng coordinates, String placeName) {
+        Place place = new Place(placeName, coordinates.latitude, coordinates.longitude);
+        dao.addPlaceToFirebase(place);
     }
 }

@@ -3,6 +3,7 @@ package com.sdmitriy.firebasetestapp.model.dao;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
+import com.sdmitriy.firebasetestapp.model.adapter.Adapter;
 import com.sdmitriy.firebasetestapp.model.adapter.CommonRecyclerViewAdapter;
 import com.sdmitriy.firebasetestapp.model.adapter.FirebasePlaceListAdapter;
 import com.sdmitriy.firebasetestapp.model.entity.Place;
@@ -12,9 +13,9 @@ import java.util.List;
 
 public class FirebaseValueEventListener implements ValueEventListener {
 
-    private CommonRecyclerViewAdapter<Place, FirebasePlaceListAdapter.Holder> listAdapter;
+    private Adapter<Place> listAdapter;
 
-    public FirebaseValueEventListener(CommonRecyclerViewAdapter<Place, FirebasePlaceListAdapter.Holder> listAdapter) {
+    public FirebaseValueEventListener(Adapter<Place> listAdapter) {
         this.listAdapter = listAdapter;
     }
 

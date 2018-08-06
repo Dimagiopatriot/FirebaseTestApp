@@ -1,8 +1,15 @@
 package com.sdmitriy.firebasetestapp.presenter;
 
+import android.location.Location;
 import android.os.Bundle;
 
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.LatLng;
 import com.sdmitriy.firebasetestapp.fragment.MapFragment;
+import com.sdmitriy.firebasetestapp.model.adapter.MapAdapter;
+import com.sdmitriy.firebasetestapp.model.entity.Place;
 import com.sdmitriy.firebasetestapp.util.Constants;
 import com.sdmitriy.firebasetestapp.util.LocationHelper;
 
@@ -10,6 +17,9 @@ public class MapFragmentPresenter {
 
     private MapFragment fragment;
     private LocationHelper locationHelper;
+    private MapAdapter mapAdapter;
+
+    private Place concretePlace;
 
     public MapFragmentPresenter(MapFragment mapFragment) {
         this.fragment = mapFragment;
@@ -17,11 +27,21 @@ public class MapFragmentPresenter {
     }
 
     private void onMapFragmentOpenStrategy(Bundle args) {
-        if (args != null && args.getParcelable(Constants.BUNDLE_PLACE) != null) {
-            //todo realization
-        } else {
+        if (args == null || args.getParcelable(Constants.BUNDLE_PLACE) == null) {
             initializeLocationHelper(fragment);
+        } else {
+            concretePlace = args.getParcelable(Constants.BUNDLE_PLACE);
         }
+    }
+
+    public void onGoogleMapReady(GoogleMap map) {
+        Location currentLocation = locationHelper.getLastKnownLocation();
+        if (currentLocation != null) {
+            mapAdapter.moveCameraToPosition(currentLocation.getLatitude(), currentLocation.getLongitude());
+        } else if (concretePlace != null) {
+            mapAdapter.moveCameraToPosition(concretePlace.getLatitude(), concretePlace.getLongitude());
+        }
+
     }
 
     private void initializeLocationHelper(MapFragment mapFragment) {
@@ -37,5 +57,9 @@ public class MapFragmentPresenter {
 
     public void disconnectGoogleApiClient() {
         locationHelper.disconnectGoogleApiClient();
+    }
+
+    public void setMapAdapter(MapAdapter mapAdapter) {
+        this.mapAdapter = mapAdapter;
     }
 }

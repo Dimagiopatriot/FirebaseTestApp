@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.sdmitriy.firebasetestapp.model.adapter.Adapter;
 import com.sdmitriy.firebasetestapp.model.adapter.CommonRecyclerViewAdapter;
 import com.sdmitriy.firebasetestapp.model.adapter.FirebasePlaceListAdapter;
 import com.sdmitriy.firebasetestapp.model.entity.Place;
@@ -40,7 +41,7 @@ public class FirebaseDaoImpl implements FirebaseDao {
     }
 
     @Override
-    public <T, VH extends RecyclerView.ViewHolder> void getPlaceListFromFirebase(CommonRecyclerViewAdapter<T, VH> adapter) {
-        reference.child(Constants.TABLE_NAME).addValueEventListener(new FirebaseValueEventListener((CommonRecyclerViewAdapter<Place, FirebasePlaceListAdapter.Holder>) adapter));
+    public <T> void getPlaceListFromFirebase(Adapter<T> adapter) {
+        reference.child(Constants.TABLE_NAME).addValueEventListener(new FirebaseValueEventListener((Adapter<Place>) adapter));
     }
 }

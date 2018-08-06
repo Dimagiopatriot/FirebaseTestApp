@@ -126,7 +126,7 @@ public class LocationHelper implements LocationListener {
         });
     }
 
-    public Location returnLastKnownLocation() {
+    public Location getLastKnownLocation() {
         return lastLocation;
     }
 

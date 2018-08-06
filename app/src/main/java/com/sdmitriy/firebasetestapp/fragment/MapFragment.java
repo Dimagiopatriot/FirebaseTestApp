@@ -13,6 +13,7 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.Marker;
 import com.sdmitriy.firebasetestapp.R;
+import com.sdmitriy.firebasetestapp.model.adapter.MapAdapter;
 import com.sdmitriy.firebasetestapp.presenter.MapFragmentPresenter;
 
 import butterknife.BindView;
@@ -66,6 +67,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        map = googleMap;
+        presenter.setMapAdapter(new MapAdapter(map));
 
+        map.setOnMarkerClickListener(this);
     }
 }

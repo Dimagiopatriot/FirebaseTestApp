@@ -9,6 +9,8 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.sdmitriy.firebasetestapp.fragment.MapFragment;
 import com.sdmitriy.firebasetestapp.model.adapter.MapAdapter;
+import com.sdmitriy.firebasetestapp.model.dao.FirebaseDao;
+import com.sdmitriy.firebasetestapp.model.dao.FirebaseDaoImpl;
 import com.sdmitriy.firebasetestapp.model.entity.Place;
 import com.sdmitriy.firebasetestapp.util.Constants;
 import com.sdmitriy.firebasetestapp.util.LocationHelper;
@@ -34,14 +36,15 @@ public class MapFragmentPresenter {
         }
     }
 
-    public void onGoogleMapReady(GoogleMap map) {
-        Location currentLocation = locationHelper.getLastKnownLocation();
-        if (currentLocation != null) {
+    public void onGoogleMapReady() {
+        if (locationHelper != null && locationHelper.getLastKnownLocation() != null) {
+            Location currentLocation = locationHelper.getLastKnownLocation();
             mapAdapter.moveCameraToPosition(currentLocation.getLatitude(), currentLocation.getLongitude());
         } else if (concretePlace != null) {
             mapAdapter.moveCameraToPosition(concretePlace.getLatitude(), concretePlace.getLongitude());
         }
-
+        FirebaseDao dao = FirebaseDaoImpl.getInstance();
+        dao.getPlaceListFromFirebase(mapAdapter);
     }
 
     private void initializeLocationHelper(MapFragment mapFragment) {
@@ -52,11 +55,15 @@ public class MapFragmentPresenter {
     }
 
     public void onRequestPermissionsResult(int resultCode, int[] grantResults) {
-        locationHelper.onRequestPermissionResult(resultCode, grantResults);
+        if (locationHelper != null) {
+            locationHelper.onRequestPermissionResult(resultCode, grantResults);
+        }
     }
 
     public void disconnectGoogleApiClient() {
-        locationHelper.disconnectGoogleApiClient();
+        if (locationHelper != null) {
+            locationHelper.disconnectGoogleApiClient();
+        }
     }
 
     public void setMapAdapter(MapAdapter mapAdapter) {

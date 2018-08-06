@@ -10,6 +10,7 @@ import com.sdmitriy.firebasetestapp.fragment.ProfileFragment;
 import com.sdmitriy.firebasetestapp.util.Utils;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 import static com.sdmitriy.firebasetestapp.util.Constants.Tags.*;
 
@@ -41,7 +42,10 @@ public class PartOneActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_part_one);
+        Utils.navigateToFragment(this, new PlacesListFragment(),
+                R.id.main_activity_container, PLACES_FRAGMENT);
 
+        ButterKnife.bind(this);
         navigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 }

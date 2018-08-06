@@ -24,7 +24,7 @@ public class PlacesListFragment extends Fragment {
 
     @BindView(R.id.places_list)
     RecyclerView placesList;
-    @BindView(R.id.swipeToRefresh)
+    @BindView(R.id.swipe_to_refresh)
     SwipeRefreshLayout swipeRefreshLayout;
     @BindView(R.id.no_places_message)
     TextView emptyListMessage;

@@ -43,6 +43,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         unbinder = ButterKnife.bind(this, view);
         presenter = new MapFragmentPresenter(this);
 
+        mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
         return view;
     }
@@ -53,10 +54,29 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     }
 
     @Override
+    public void onResume() {
+        mapView.onResume();
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        mapView.onPause();
+        super.onPause();
+    }
+
+    @Override
     public void onDestroyView() {
         unbinder.unbind();
         presenter.disconnectGoogleApiClient();
+        mapView.onDestroy();
         super.onDestroyView();
+    }
+
+    @Override
+    public void onLowMemory() {
+        mapView.onLowMemory();
+        super.onLowMemory();
     }
 
     @Override
@@ -68,8 +88,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
-        presenter.setMapAdapter(new MapAdapter(map));
+        map.getUiSettings().setMyLocationButtonEnabled(false);
+        map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
+        presenter.setMapAdapter(new MapAdapter(map));
+        presenter.onGoogleMapReady();
         map.setOnMarkerClickListener(this);
     }
 }

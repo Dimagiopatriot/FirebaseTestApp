@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.sdmitriy.firebasetestapp.presenter.LoginActivityPresenter;
 
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class LoginActivity extends AppCompatActivity {
@@ -19,6 +20,7 @@ public class LoginActivity extends AppCompatActivity {
 
         presenter = new LoginActivityPresenter(this);
         presenter.buildGoogleApiClient();
+        ButterKnife.bind(this);
     }
 
     @OnClick(R.id.login_via_google_plus)

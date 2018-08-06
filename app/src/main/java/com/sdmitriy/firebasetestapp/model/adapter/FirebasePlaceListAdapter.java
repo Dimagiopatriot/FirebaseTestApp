@@ -84,13 +84,14 @@ public class FirebasePlaceListAdapter extends CommonRecyclerViewAdapter<Place, F
         }
 
         @OnClick(R.id.item)
-        public void onItemClick() {
+        void onItemClick() {
             presenter.openMapFragment(place);
         }
 
         @OnLongClick(R.id.item)
-        public void onItemLongClick() {
+        boolean onItemLongClick() {
             presenter.removePlace(place);
+            return false;
         }
     }
 }

@@ -31,9 +31,9 @@ public class MapAdapter implements Adapter<Place> {
         this.presenter = presenter;
     }
 
-    public void moveCameraToPosition(double latitude, double longitude) {
+    public void moveCameraToPosition(double latitude, double longitude, float zoomLevel) {
         LatLng position = new LatLng(latitude, longitude);
-        map.animateCamera(CameraUpdateFactory.newLatLngZoom(position, 12.0f));
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(position, zoomLevel));
     }
 
     @Override
@@ -51,6 +51,7 @@ public class MapAdapter implements Adapter<Place> {
     @Override
     public void onDataChangedResponse() {
         presenter.showConcretePlaceInfoWindow();
+        presenter.addItemsToClusterManager(places);
     }
 
     private void notifySetDataChanged() {

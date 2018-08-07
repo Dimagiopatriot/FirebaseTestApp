@@ -3,8 +3,11 @@ package com.sdmitriy.firebasetestapp.presenter;
 import android.location.Location;
 import android.os.Bundle;
 
+import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
+import com.google.maps.android.clustering.ClusterManager;
+import com.google.maps.android.clustering.algo.GridBasedAlgorithm;
 import com.sdmitriy.firebasetestapp.fragment.MapFragment;
 import com.sdmitriy.firebasetestapp.model.adapter.MapAdapter;
 import com.sdmitriy.firebasetestapp.model.dao.FirebaseDao;
@@ -14,12 +17,15 @@ import com.sdmitriy.firebasetestapp.util.Constants;
 import com.sdmitriy.firebasetestapp.util.LocationHelper;
 import com.sdmitriy.firebasetestapp.util.Utils;
 
+import java.util.List;
+
 public class MapFragmentPresenter {
 
     private MapFragment fragment;
     private LocationHelper locationHelper;
     private MapAdapter mapAdapter;
     private FirebaseDao dao;
+    private ClusterManager<Place> clusterManager;
 
     private Place concretePlace;
     private String markerId;
@@ -40,9 +46,9 @@ public class MapFragmentPresenter {
     public void onGoogleMapReady() {
         if (locationHelper != null && locationHelper.getLastKnownLocation() != null) {
             Location currentLocation = locationHelper.getLastKnownLocation();
-            mapAdapter.moveCameraToPosition(currentLocation.getLatitude(), currentLocation.getLongitude());
+            mapAdapter.moveCameraToPosition(currentLocation.getLatitude(), currentLocation.getLongitude(), 12.0f);
         } else if (concretePlace != null) {
-            mapAdapter.moveCameraToPosition(concretePlace.getLatitude(), concretePlace.getLongitude());
+            mapAdapter.moveCameraToPosition(concretePlace.getLatitude(), concretePlace.getLongitude(), 12.0f);
         }
         dao = FirebaseDaoImpl.getInstance();
         dao.getPlaceListFromFirebase(mapAdapter);
@@ -100,5 +106,21 @@ public class MapFragmentPresenter {
         Place place = new Place(placeName, coordinates.latitude, coordinates.longitude);
         dao.addPlaceToFirebase(place);
         mapAdapter.createMarker(place);
+    }
+
+    public void addItemsToClusterManager(List<Place> items){
+        clusterManager.addItems(items);
+    }
+
+    public void setUpClusterManager(GoogleMap map) {
+        clusterManager = new ClusterManager<>(fragment.getContext(), map);
+        clusterManager.setOnClusterClickListener((cluster) -> {
+            LatLng clusterPosition = cluster.getPosition();
+            mapAdapter.moveCameraToPosition(clusterPosition.latitude, clusterPosition.longitude, 0.0f);
+            return false;
+        });
+
+        /*map.setOnCameraIdleListener(clusterManager);
+        map.setOnMarkerClickListener(clusterManager);*/
     }
 }

@@ -3,7 +3,10 @@ package com.sdmitriy.firebasetestapp.model.entity;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Place implements Parcelable{
+import com.google.android.gms.maps.model.LatLng;
+import com.google.maps.android.clustering.ClusterItem;
+
+public class Place implements Parcelable, ClusterItem {
 
     public Place() {
     }
@@ -69,5 +72,46 @@ public class Place implements Parcelable{
         dest.writeString(placeName);
         dest.writeDouble(latitude);
         dest.writeDouble(longitude);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Place place = (Place) o;
+
+        if (Double.compare(place.latitude, latitude) != 0) return false;
+        if (Double.compare(place.longitude, longitude) != 0) return false;
+        if (Uid != null ? !Uid.equals(place.Uid) : place.Uid != null) return false;
+        return placeName != null ? placeName.equals(place.placeName) : place.placeName == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = Uid != null ? Uid.hashCode() : 0;
+        result = 31 * result + (placeName != null ? placeName.hashCode() : 0);
+        temp = Double.doubleToLongBits(latitude);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(longitude);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        return result;
+    }
+
+    @Override
+    public LatLng getPosition() {
+        return new LatLng(latitude, longitude);
+    }
+
+    @Override
+    public String getTitle() {
+        return placeName;
+    }
+
+    @Override
+    public String getSnippet() {
+        return "";
     }
 }

@@ -83,8 +83,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
 
     @Override
     public boolean onMarkerClick(Marker marker) {
-        Toast.makeText(getContext(), marker.getId(),
-                Toast.LENGTH_SHORT).show();
         return presenter.showHideInfoWindow(marker);
     }
 
@@ -96,6 +94,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
 
         presenter.setMapAdapter(new MapAdapter(googleMap, presenter));
         presenter.onGoogleMapReady();
+        presenter.setUpClusterManager(googleMap);
 
         googleMap.setOnMarkerClickListener(this);
         googleMap.setOnMapLongClickListener(this);

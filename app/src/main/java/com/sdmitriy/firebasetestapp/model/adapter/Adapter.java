@@ -13,4 +13,6 @@ public interface Adapter<T> {
     void addItems(List<T> items);
 
     void removeItem(Place item);
+
+    void onDataChangedResponse();
 }

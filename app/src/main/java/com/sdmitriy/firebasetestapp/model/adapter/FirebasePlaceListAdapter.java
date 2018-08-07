@@ -34,13 +34,17 @@ public class FirebasePlaceListAdapter extends CommonRecyclerViewAdapter<Place, F
             this.items = items;
             notifyDataSetChanged();
         }
-        presenter.checkListEmptiness();
     }
 
     @Override
     public void removeItem(Place place) {
         items.remove(place);
         notifyDataSetChanged();
+    }
+
+    @Override
+    public void onDataChangedResponse() {
+        presenter.checkListEmptiness();
     }
 
     @NonNull

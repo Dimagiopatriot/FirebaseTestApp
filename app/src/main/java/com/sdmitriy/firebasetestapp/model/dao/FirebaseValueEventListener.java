@@ -4,8 +4,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.sdmitriy.firebasetestapp.model.adapter.Adapter;
-import com.sdmitriy.firebasetestapp.model.adapter.CommonRecyclerViewAdapter;
-import com.sdmitriy.firebasetestapp.model.adapter.FirebasePlaceListAdapter;
 import com.sdmitriy.firebasetestapp.model.entity.Place;
 
 import java.util.ArrayList;
@@ -27,6 +25,7 @@ public class FirebaseValueEventListener implements ValueEventListener {
             places.add(place);
         }
         listAdapter.addItems(places);
+        listAdapter.onDataChangedResponse();
     }
 
     @Override

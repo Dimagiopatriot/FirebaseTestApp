@@ -40,13 +40,17 @@ public class MapAdapter implements Adapter<Place> {
     public void addItems(List<Place> items) {
         places.addAll(items);
         notifySetDataChanged();
-        presenter.showConcretePlaceInfoWindow();
     }
 
     @Override
     public void removeItem(Place item) {
         places.remove(item);
         notifySetDataChanged();
+    }
+
+    @Override
+    public void onDataChangedResponse() {
+        presenter.showConcretePlaceInfoWindow();
     }
 
     private void notifySetDataChanged() {

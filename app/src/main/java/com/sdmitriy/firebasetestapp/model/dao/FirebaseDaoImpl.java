@@ -36,6 +36,6 @@ public class FirebaseDaoImpl implements FirebaseDao {
 
     @Override
     public <T> void getPlaceListFromFirebase(Adapter<T> adapter) {
-        reference.child(Constants.TABLE_NAME).addValueEventListener(new FirebaseValueEventListener((Adapter<Place>) adapter));
+        reference.child(Constants.TABLE_NAME).addListenerForSingleValueEvent(new FirebaseValueEventListener((Adapter<Place>) adapter));
     }
 }

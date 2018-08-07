@@ -2,16 +2,18 @@ package com.sdmitriy.firebasetestapp.model.adapter;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.sdmitriy.firebasetestapp.R;
 import com.sdmitriy.firebasetestapp.model.entity.Place;
+import com.sdmitriy.firebasetestapp.presenter.MapFragmentPresenter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by dmitriysmishnyi on 06.08.18.
@@ -20,10 +22,13 @@ import java.util.List;
 public class MapAdapter implements Adapter<Place> {
 
     private List<Place> places = new ArrayList<>();
+    private Map<Place, Marker> markerMap = new HashMap<>();
     private GoogleMap map;
+    private MapFragmentPresenter presenter;
 
-    public MapAdapter(GoogleMap map) {
+    public MapAdapter(GoogleMap map, MapFragmentPresenter presenter) {
         this.map = map;
+        this.presenter = presenter;
     }
 
     public void moveCameraToPosition(double latitude, double longitude) {
@@ -35,6 +40,7 @@ public class MapAdapter implements Adapter<Place> {
     public void addItems(List<Place> items) {
         places.addAll(items);
         notifySetDataChanged();
+        presenter.showConcretePlaceInfoWindow();
     }
 
     @Override
@@ -45,14 +51,22 @@ public class MapAdapter implements Adapter<Place> {
 
     private void notifySetDataChanged() {
         for (Place place : places) {
-            createMarker(place.getLatitude(), place.getLongitude(), place.getPlaceName());
+            createMarker(place);
         }
     }
 
-    public void createMarker(double latitude, double longitude, String title) {
-        map.addMarker(new MarkerOptions()
-                .position(new LatLng(latitude, longitude))
-                .title(title)
+    public void createMarker(Place place) {
+        Marker marker = map.addMarker(new MarkerOptions()
+                .position(new LatLng(place.getLatitude(), place.getLongitude()))
+                .title(place.getPlaceName())
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_marker)));
+        markerMap.put(place, marker);
+    }
+
+    public Marker findMarker(Place place) {
+        return markerMap.containsKey(place) ? markerMap.get(place) : map.addMarker(new MarkerOptions()
+                .position(new LatLng(place.getLatitude(), place.getLongitude()))
+                .title(place.getPlaceName())
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_marker)));
     }
 }

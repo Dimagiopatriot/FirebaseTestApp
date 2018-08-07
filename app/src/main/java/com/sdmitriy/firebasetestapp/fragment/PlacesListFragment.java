@@ -47,15 +47,11 @@ public class PlacesListFragment extends Fragment {
     }
 
     public void showEmptyListMessage() {
-        if (emptyListMessage != null) {
-            emptyListMessage.setVisibility(View.VISIBLE);
-        }
+        emptyListMessage.setVisibility(View.VISIBLE);
     }
 
     public void hideEmptyListMessage() {
-        if (emptyListMessage != null) {
-            emptyListMessage.setVisibility(View.GONE);
-        }
+        emptyListMessage.setVisibility(View.GONE);
     }
 
     @Override

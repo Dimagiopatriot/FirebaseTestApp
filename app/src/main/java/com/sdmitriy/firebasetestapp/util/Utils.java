@@ -61,4 +61,12 @@ public class Utils {
         UserData userData = getUserDataFromSharedPreferences(context);
         return !userData.getEmail().equals("") && !userData.getUserId().equals("");
     }
+
+    public static String formatString(String formattedString) {
+        if (formattedString.equals("")){
+            return "Empty place name";
+        } else {
+            return formattedString;
+        }
+    }
 }

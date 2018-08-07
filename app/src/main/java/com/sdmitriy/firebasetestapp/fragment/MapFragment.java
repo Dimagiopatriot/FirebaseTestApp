@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -24,7 +25,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 public class MapFragment extends Fragment implements OnMapReadyCallback,
-        GoogleMap.OnMarkerClickListener, GoogleMap.OnMapLongClickListener {
+        GoogleMap.OnMarkerClickListener, GoogleMap.OnMapLongClickListener, GoogleMap.OnMapClickListener {
 
     private Unbinder unbinder;
     private MapFragmentPresenter presenter;
@@ -82,20 +83,23 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
 
     @Override
     public boolean onMarkerClick(Marker marker) {
-
-        presenter.showHideInfoWindow(marker);
-        return false;
+        Toast.makeText(getContext(), marker.getId(),
+                Toast.LENGTH_SHORT).show();
+        return presenter.showHideInfoWindow(marker);
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         googleMap.getUiSettings().setMyLocationButtonEnabled(false);
+        googleMap.getUiSettings().setMapToolbarEnabled(false);
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
-        presenter.setMapAdapter(new MapAdapter(googleMap));
+        presenter.setMapAdapter(new MapAdapter(googleMap, presenter));
         presenter.onGoogleMapReady();
+
         googleMap.setOnMarkerClickListener(this);
         googleMap.setOnMapLongClickListener(this);
+        googleMap.setOnMapClickListener(this);
     }
 
     @Override
@@ -112,5 +116,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
                 .setNegativeButton("Cancel", (dialog, which) -> {});
         AlertDialog alertDialog = alertBuilder.create();
         alertDialog.show();
+        presenter.resetMarkerId();
+    }
+
+    @Override
+    public void onMapClick(LatLng latLng) {
+        presenter.resetMarkerId();
     }
 }

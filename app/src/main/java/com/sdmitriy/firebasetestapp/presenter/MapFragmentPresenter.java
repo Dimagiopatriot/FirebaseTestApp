@@ -12,6 +12,7 @@ import com.sdmitriy.firebasetestapp.model.dao.FirebaseDaoImpl;
 import com.sdmitriy.firebasetestapp.model.entity.Place;
 import com.sdmitriy.firebasetestapp.util.Constants;
 import com.sdmitriy.firebasetestapp.util.LocationHelper;
+import com.sdmitriy.firebasetestapp.util.Utils;
 
 public class MapFragmentPresenter {
 
@@ -21,7 +22,7 @@ public class MapFragmentPresenter {
     private FirebaseDao dao;
 
     private Place concretePlace;
-    private Marker previousMarker;
+    private String markerId;
 
     public MapFragmentPresenter(MapFragment mapFragment) {
         this.fragment = mapFragment;
@@ -70,12 +71,34 @@ public class MapFragmentPresenter {
         this.mapAdapter = mapAdapter;
     }
 
-    public void showHideInfoWindow(Marker marker) {
-        //todo realize
+    public boolean showHideInfoWindow(Marker marker) {
+        if (marker.getId().equals(markerId)) {
+            markerId = "";
+            marker.hideInfoWindow();
+            return true;
+        } else {
+            markerId = marker.getId();
+            marker.showInfoWindow();
+            return false;
+        }
+    }
+
+    public void resetMarkerId() {
+        markerId = "";
+    }
+
+    public void showConcretePlaceInfoWindow() {
+        if (concretePlace != null) {
+            Marker concretePlaceMarker = mapAdapter.findMarker(concretePlace);
+            concretePlaceMarker.showInfoWindow();
+            markerId = concretePlaceMarker.getId();
+        }
     }
 
     public void savePlaceToDatabase(LatLng coordinates, String placeName) {
+        placeName = Utils.formatString(placeName);
         Place place = new Place(placeName, coordinates.latitude, coordinates.longitude);
         dao.addPlaceToFirebase(place);
+        mapAdapter.createMarker(place);
     }
 }

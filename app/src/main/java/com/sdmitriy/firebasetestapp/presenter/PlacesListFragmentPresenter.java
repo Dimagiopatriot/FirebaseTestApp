@@ -55,6 +55,7 @@ public class PlacesListFragmentPresenter {
         Bundle args = new Bundle();
         args.putParcelable(Constants.BUNDLE_PLACE, place);
         if (fragment.getActivity() != null) {
+            fragment.getActivity().setTitle(R.string.title_map);
             Utils.navigateToFragment((AppCompatActivity) fragment.getActivity(), MapFragment.getInstance(args),
                     R.id.main_activity_container, Constants.Tags.MAP_FRAGMENT);
         }

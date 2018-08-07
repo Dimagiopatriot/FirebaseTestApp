@@ -39,7 +39,7 @@ public class MarkerItem implements ClusterItem {
 
     @Override
     public String getSnippet() {
-        return "";
+        return null;
     }
 
     public MarkerOptions getMarker() {

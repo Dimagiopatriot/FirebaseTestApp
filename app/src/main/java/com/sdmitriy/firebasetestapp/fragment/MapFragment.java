@@ -25,7 +25,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 public class MapFragment extends Fragment implements OnMapReadyCallback,
-        GoogleMap.OnMarkerClickListener, GoogleMap.OnMapLongClickListener, GoogleMap.OnMapClickListener {
+        GoogleMap.OnMapLongClickListener, GoogleMap.OnMapClickListener {
 
     private Unbinder unbinder;
     private MapFragmentPresenter presenter;
@@ -82,11 +82,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     }
 
     @Override
-    public boolean onMarkerClick(Marker marker) {
-        return presenter.showHideInfoWindow(marker);
-    }
-
-    @Override
     public void onMapReady(GoogleMap googleMap) {
         googleMap.getUiSettings().setMyLocationButtonEnabled(false);
         googleMap.getUiSettings().setMapToolbarEnabled(false);
@@ -94,9 +89,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
 
         presenter.setMapAdapter(new MapAdapter(googleMap, presenter));
         presenter.onGoogleMapReady();
-        presenter.setUpClusterManager(googleMap);
 
-        googleMap.setOnMarkerClickListener(this);
         googleMap.setOnMapLongClickListener(this);
         googleMap.setOnMapClickListener(this);
     }

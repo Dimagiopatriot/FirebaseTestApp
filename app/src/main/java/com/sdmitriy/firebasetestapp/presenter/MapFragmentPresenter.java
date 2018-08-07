@@ -1,24 +1,19 @@
 package com.sdmitriy.firebasetestapp.presenter;
 
+import android.content.Context;
 import android.location.Location;
 import android.os.Bundle;
 
-import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
-import com.google.maps.android.clustering.ClusterManager;
 import com.sdmitriy.firebasetestapp.fragment.MapFragment;
 import com.sdmitriy.firebasetestapp.model.adapter.MapAdapter;
 import com.sdmitriy.firebasetestapp.model.dao.FirebaseDao;
 import com.sdmitriy.firebasetestapp.model.dao.FirebaseDaoImpl;
-import com.sdmitriy.firebasetestapp.model.entity.MarkerItem;
 import com.sdmitriy.firebasetestapp.model.entity.Place;
 import com.sdmitriy.firebasetestapp.util.Constants;
 import com.sdmitriy.firebasetestapp.util.LocationHelper;
 import com.sdmitriy.firebasetestapp.util.Utils;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MapFragmentPresenter {
 
@@ -26,7 +21,6 @@ public class MapFragmentPresenter {
     private LocationHelper locationHelper;
     private MapAdapter mapAdapter;
     private FirebaseDao dao;
-    private ClusterManager<MarkerItem> clusterManager;
 
     private Place concretePlace;
     private String markerId;
@@ -109,23 +103,7 @@ public class MapFragmentPresenter {
         mapAdapter.createMarker(place);
     }
 
-    public void addItemsToClusterManager(List<Place> items){
-        List<MarkerItem> markers = new ArrayList<>();
-        for (Place item : items) {
-            markers.add(new MarkerItem(item));
-        }
-        clusterManager.addItems(markers);
-    }
-
-    public void setUpClusterManager(GoogleMap map) {
-        clusterManager = new ClusterManager<>(fragment.getContext(), map);
-        clusterManager.setOnClusterClickListener((cluster) -> {
-            LatLng clusterPosition = cluster.getPosition();
-            mapAdapter.moveCameraToPosition(clusterPosition.latitude, clusterPosition.longitude, 0.0f);
-            return false;
-        });
-
-        /*map.setOnCameraIdleListener(clusterManager);
-        map.setOnMarkerClickListener(clusterManager);*/
+    public Context getContext() {
+        return fragment.getContext();
     }
 }

@@ -3,10 +3,7 @@ package com.sdmitriy.firebasetestapp.model.entity;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.google.android.gms.maps.model.LatLng;
-import com.google.maps.android.clustering.ClusterItem;
-
-public class Place implements Parcelable, ClusterItem {
+public class Place implements Parcelable{
 
     public Place() {
     }
@@ -98,20 +95,5 @@ public class Place implements Parcelable, ClusterItem {
         temp = Double.doubleToLongBits(longitude);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         return result;
-    }
-
-    @Override
-    public LatLng getPosition() {
-        return new LatLng(latitude, longitude);
-    }
-
-    @Override
-    public String getTitle() {
-        return placeName;
-    }
-
-    @Override
-    public String getSnippet() {
-        return "";
     }
 }

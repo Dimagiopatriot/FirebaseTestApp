@@ -7,16 +7,17 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.maps.android.clustering.ClusterManager;
-import com.google.maps.android.clustering.algo.GridBasedAlgorithm;
 import com.sdmitriy.firebasetestapp.fragment.MapFragment;
 import com.sdmitriy.firebasetestapp.model.adapter.MapAdapter;
 import com.sdmitriy.firebasetestapp.model.dao.FirebaseDao;
 import com.sdmitriy.firebasetestapp.model.dao.FirebaseDaoImpl;
+import com.sdmitriy.firebasetestapp.model.entity.MarkerItem;
 import com.sdmitriy.firebasetestapp.model.entity.Place;
 import com.sdmitriy.firebasetestapp.util.Constants;
 import com.sdmitriy.firebasetestapp.util.LocationHelper;
 import com.sdmitriy.firebasetestapp.util.Utils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MapFragmentPresenter {
@@ -25,7 +26,7 @@ public class MapFragmentPresenter {
     private LocationHelper locationHelper;
     private MapAdapter mapAdapter;
     private FirebaseDao dao;
-    private ClusterManager<Place> clusterManager;
+    private ClusterManager<MarkerItem> clusterManager;
 
     private Place concretePlace;
     private String markerId;
@@ -109,7 +110,11 @@ public class MapFragmentPresenter {
     }
 
     public void addItemsToClusterManager(List<Place> items){
-        clusterManager.addItems(items);
+        List<MarkerItem> markers = new ArrayList<>();
+        for (Place item : items) {
+            markers.add(new MarkerItem(item));
+        }
+        clusterManager.addItems(markers);
     }
 
     public void setUpClusterManager(GoogleMap map) {

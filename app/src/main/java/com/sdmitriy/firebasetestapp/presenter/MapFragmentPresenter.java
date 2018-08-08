@@ -10,6 +10,7 @@ import com.sdmitriy.firebasetestapp.fragment.MapFragment;
 import com.sdmitriy.firebasetestapp.model.adapter.MapAdapter;
 import com.sdmitriy.firebasetestapp.model.dao.FirebaseDao;
 import com.sdmitriy.firebasetestapp.model.dao.FirebaseDaoImpl;
+import com.sdmitriy.firebasetestapp.model.entity.MarkerItem;
 import com.sdmitriy.firebasetestapp.model.entity.Place;
 import com.sdmitriy.firebasetestapp.util.Constants;
 import com.sdmitriy.firebasetestapp.util.LocationHelper;
@@ -88,11 +89,10 @@ public class MapFragmentPresenter {
         markerId = "";
     }
 
-    public void showConcretePlaceInfoWindow() {
-        if (concretePlace != null) {
-            Marker concretePlaceMarker = mapAdapter.findMarker(concretePlace);
-            concretePlaceMarker.showInfoWindow();
-            markerId = concretePlaceMarker.getId();
+    public void showConcretePlaceInfoWindow(MarkerItem item, Marker marker) {
+        if (concretePlace != null && concretePlace.equals(item.getPlace())) {
+            marker.showInfoWindow();
+            markerId = marker.getId();
         }
     }
 

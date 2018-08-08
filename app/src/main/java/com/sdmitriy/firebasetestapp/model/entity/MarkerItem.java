@@ -49,4 +49,8 @@ public class MarkerItem implements ClusterItem {
     public void setMarker(MarkerOptions marker) {
         this.marker = marker;
     }
+
+    public Place getPlace() {
+        return place;
+    }
 }

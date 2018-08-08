@@ -13,9 +13,7 @@ import com.sdmitriy.firebasetestapp.presenter.MapFragmentPresenter;
 import com.sdmitriy.firebasetestapp.util.CustomClusterRenderer;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by dmitriysmishnyi on 06.08.18.
@@ -24,7 +22,6 @@ import java.util.Map;
 public class MapAdapter implements Adapter<Place> {
 
     private List<Place> places = new ArrayList<>();
-    private Map<Place, MarkerItem> markerItemMap = new HashMap<>();
     private GoogleMap map;
     private MapFragmentPresenter presenter;
     private ClusterManager<MarkerItem> clusterManager;
@@ -54,7 +51,6 @@ public class MapAdapter implements Adapter<Place> {
 
     @Override
     public void onDataChangedResponse() {
-        //presenter.showConcretePlaceInfoWindow();
     }
 
     private void notifySetDataChanged() {
@@ -63,7 +59,6 @@ public class MapAdapter implements Adapter<Place> {
         for (Place place : places) {
             MarkerItem markerItem = new MarkerItem(place);
             markers.add(markerItem);
-            markerItemMap.put(place, markerItem);
         }
         clusterManager.addItems(markers);
         clusterManager.cluster();
@@ -72,16 +67,6 @@ public class MapAdapter implements Adapter<Place> {
     public void createMarker(Place place) {
         clusterManager.addItem(new MarkerItem(place));
         clusterManager.cluster();
-    }
-
-    public Marker findMarker(Place place) {
-        CustomClusterRenderer renderer = (CustomClusterRenderer) clusterManager.getRenderer();
-        if (!markerItemMap.containsKey(place)) {
-            MarkerItem markerItem = new MarkerItem(place);
-            clusterManager.addItem(markerItem);
-            markerItemMap.put(place, markerItem);
-        }
-        return renderer.getMarker(markerItemMap.get(place));
     }
 
     private void setUpClusterManager(Context context) {
@@ -97,6 +82,7 @@ public class MapAdapter implements Adapter<Place> {
             return presenter.showHideInfoWindow(marker);
         }));
         clusterManager.setRenderer(new CustomClusterRenderer(context, map, clusterManager));
+        ((CustomClusterRenderer) clusterManager.getRenderer()).setPresenter(presenter);
 
         map.setOnCameraIdleListener(clusterManager);
         map.setOnMarkerClickListener(clusterManager);

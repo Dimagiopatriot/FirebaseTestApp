@@ -3,6 +3,8 @@ package com.sdmitriy.firebasetestapp.util;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -13,13 +15,16 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.PendingResult;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
-import com.google.android.gms.location.LocationSettingsResponse;
-import com.google.android.gms.tasks.Task;
+import com.google.android.gms.location.LocationSettingsResult;
+import com.google.android.gms.location.LocationSettingsStatusCodes;
+import com.sdmitriy.firebasetestapp.presenter.MapFragmentPresenter;
 
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
@@ -27,16 +32,21 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 public class LocationHelper implements LocationListener {
 
     private final int REQUEST_PERMISSION_REQUEST_CODE = 34;
+    private final int REQUEST_CHECK_SETTINGS = 1;
 
     private Location lastLocation;
     private GoogleApiClient googleApiClient;
+    private LocationRequest locationRequest;
 
     private Context context;
     private Activity activity;
 
-    public LocationHelper(Activity activity) {
+    private MapFragmentPresenter presenter;
+
+    public LocationHelper(Activity activity, MapFragmentPresenter presenter) {
         this.activity = activity;
         context = activity.getApplicationContext();
+        this.presenter = presenter;
 
         initializeGoogleApiClient();
     }
@@ -77,7 +87,7 @@ public class LocationHelper implements LocationListener {
         long timeoutInterval = 10000; //in milisecs
         long fastestTimeoutInterval = 1000;
 
-        LocationRequest locationRequest = new LocationRequest();
+        locationRequest = new LocationRequest();
         locationRequest.setInterval(timeoutInterval);
         locationRequest.setFastestInterval(fastestTimeoutInterval);
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
@@ -86,15 +96,37 @@ public class LocationHelper implements LocationListener {
     }
 
     private void callbackPendingResult(LocationSettingsRequest.Builder builder) {
-        Task<LocationSettingsResponse> response = LocationServices.getSettingsClient(context)
-                .checkLocationSettings(builder.build());
+        PendingResult<LocationSettingsResult> result = LocationServices.SettingsApi
+                .checkLocationSettings(googleApiClient, builder.build());
 
-        response.addOnCompleteListener(task -> {
-            if (!checkPermissions()) {
-                startLocationPermissionRequest();
-            } else {
-                checkGoogleClientConnection();
-                getLastLocation();
+        result.setResultCallback(locationSettingsResult -> {
+            final Status status = locationSettingsResult.getStatus();
+            switch (status.getStatusCode()) {
+                case LocationSettingsStatusCodes.SUCCESS:
+                    // All location settings are satisfied. The client can
+                    // initialize location requests here.
+                    if (!checkPermissions()) {
+                        startLocationPermissionRequest();
+                    } else {
+                        checkGoogleClientConnection();
+                        getLastLocation();
+                    }
+                    break;
+                case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
+                    // Location settings are not satisfied, but this can be fixed
+                    // by showing the user a dialog.
+                    try {
+                        // Show the dialog by calling startResolutionForResult(),
+                        // and check the result in onActivityResult().
+                        status.startResolutionForResult(activity, REQUEST_CHECK_SETTINGS);
+                    } catch (IntentSender.SendIntentException e) {
+                        // Ignore the error.
+                    }
+                    break;
+                case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
+                    // Location settings are not satisfied. However, we have no way
+                    // to fix the settings so we won't show the dialog.
+                    break;
             }
         });
     }
@@ -122,12 +154,11 @@ public class LocationHelper implements LocationListener {
         fusedLocationClient.getLastLocation().addOnCompleteListener(command -> {
             if (command.isSuccessful()) {
                 lastLocation = command.getResult();
+                presenter.moveCameraToUserPosition(lastLocation);
+            } else {
+                fusedLocationClient.requestLocationUpdates(locationRequest, null);
             }
         });
-    }
-
-    public Location getLastKnownLocation() {
-        return lastLocation;
     }
 
     private void onConnectionFailed(ConnectionResult result) {
@@ -148,6 +179,26 @@ public class LocationHelper implements LocationListener {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 getLastLocation();
             }
+        }
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case REQUEST_CHECK_SETTINGS:
+                switch (resultCode) {
+                    case Activity.RESULT_OK:
+                        // All required changes were successfully made
+                        checkGoogleClientConnection();
+                        getLastLocation();
+                        break;
+                    case Activity.RESULT_CANCELED:
+                        // The user was asked to change settings, but chose not to do
+                        Toast.makeText(context, "Location Service not Enabled", Toast.LENGTH_SHORT).show();
+                        break;
+                    default:
+                        break;
+                }
+                break;
         }
     }
 }

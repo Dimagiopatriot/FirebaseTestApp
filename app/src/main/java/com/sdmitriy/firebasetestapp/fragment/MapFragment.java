@@ -1,6 +1,7 @@
 package com.sdmitriy.firebasetestapp.fragment;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -114,5 +115,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     @Override
     public void onMapClick(LatLng latLng) {
         presenter.resetMarkerId();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        presenter.onActivityResult(requestCode, resultCode, data);
     }
 }

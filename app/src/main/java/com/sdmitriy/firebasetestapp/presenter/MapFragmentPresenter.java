@@ -1,6 +1,7 @@
 package com.sdmitriy.firebasetestapp.presenter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 
@@ -41,19 +42,20 @@ public class MapFragmentPresenter {
     }
 
     public void onGoogleMapReady() {
-        if (locationHelper != null && locationHelper.getLastKnownLocation() != null) {
-            Location currentLocation = locationHelper.getLastKnownLocation();
-            mapAdapter.moveCameraToPosition(currentLocation.getLatitude(), currentLocation.getLongitude(), 12.0f);
-        } else if (concretePlace != null) {
+        if (concretePlace != null) {
             mapAdapter.moveCameraToPosition(concretePlace.getLatitude(), concretePlace.getLongitude(), 12.0f);
         }
         dao = FirebaseDaoImpl.getInstance();
         dao.getPlaceListFromFirebase(mapAdapter);
     }
 
+    public void moveCameraToUserPosition(Location currentLocation) {
+        mapAdapter.moveCameraToPosition(currentLocation.getLatitude(), currentLocation.getLongitude(), 12.0f);
+    }
+
     private void initializeLocationHelper(MapFragment mapFragment) {
         if (mapFragment.getActivity() != null) {
-            locationHelper = new LocationHelper(mapFragment.getActivity());
+            locationHelper = new LocationHelper(mapFragment.getActivity(), this);
             locationHelper.connectGoogleApiClient();
         }
     }
@@ -107,5 +109,11 @@ public class MapFragmentPresenter {
 
     public Context getContext() {
         return fragment.getContext();
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (locationHelper != null) {
+            locationHelper.onActivityResult(requestCode, resultCode, data);
+        }
     }
 }

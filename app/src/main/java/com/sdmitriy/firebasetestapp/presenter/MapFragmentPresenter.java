@@ -25,6 +25,7 @@ public class MapFragmentPresenter {
 
     private Place concretePlace;
     private String markerId;
+    private boolean showOnce = true;
 
     public MapFragmentPresenter(MapFragment mapFragment) {
         this.fragment = mapFragment;
@@ -90,9 +91,10 @@ public class MapFragmentPresenter {
     }
 
     public void showConcretePlaceInfoWindow(MarkerItem item, Marker marker) {
-        if (concretePlace != null && concretePlace.equals(item.getPlace())) {
+        if (concretePlace != null && concretePlace.equals(item.getPlace()) && showOnce) {
             marker.showInfoWindow();
             markerId = marker.getId();
+            showOnce = false;
         }
     }
 

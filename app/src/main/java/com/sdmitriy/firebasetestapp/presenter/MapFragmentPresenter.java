@@ -58,9 +58,8 @@ public class MapFragmentPresenter {
     }
 
     public void addUserMarker() {
-        if (userLocation != null && showOnce) {
+        if (userLocation != null) {
             mapAdapter.createMarker(new UserMarkerItem(userLocation));
-            showOnce = false;
         }
     }
 
@@ -112,6 +111,7 @@ public class MapFragmentPresenter {
     }
 
     public void savePlaceToDatabase(LatLng coordinates, String placeName) {
+        Utils.checkNetworkConnection(fragment.getContext());
         placeName = Utils.formatString(placeName);
         Place place = new Place(placeName, coordinates.latitude, coordinates.longitude);
         dao.addPlaceToFirebase(place);

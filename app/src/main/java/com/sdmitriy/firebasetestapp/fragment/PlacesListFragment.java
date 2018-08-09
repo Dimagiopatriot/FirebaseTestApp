@@ -34,6 +34,9 @@ public class PlacesListFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.place_list_fragment, container, false);
         unbinder = ButterKnife.bind(this, view);
+        if (getActivity() != null) {
+            this.getActivity().setTitle(R.string.title_list);
+        }
 
         PlacesListFragmentPresenter presenter = new PlacesListFragmentPresenter(this);
         presenter.setUpAdapter(placesList);

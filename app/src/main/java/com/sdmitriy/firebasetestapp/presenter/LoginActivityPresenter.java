@@ -4,11 +4,13 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.NonNull;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.auth.api.signin.GoogleSignInStatusCodes;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.sdmitriy.firebasetestapp.LoginActivity;
@@ -69,6 +71,8 @@ public class LoginActivityPresenter implements GoogleApiClient.OnConnectionFaile
                 Utils.saveUserDataToSharedPreferences(userData, activity);
             }
             startMainActivity();
+        } else if (result.getStatus().getStatusCode() == GoogleSignInStatusCodes.NETWORK_ERROR) {
+            Toast.makeText(activity, "Check network connection.", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -76,6 +80,7 @@ public class LoginActivityPresenter implements GoogleApiClient.OnConnectionFaile
         Intent intent = new Intent(activity, PartOneActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         activity.startActivity(intent);
+        activity.finish();
     }
 
     @Override

@@ -10,13 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.sdmitriy.firebasetestapp.R;
 import com.sdmitriy.firebasetestapp.model.adapter.MapAdapter;
 import com.sdmitriy.firebasetestapp.presenter.MapFragmentPresenter;
@@ -46,6 +44,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         View view = inflater.inflate(R.layout.map_fragment, container, false);
         unbinder = ButterKnife.bind(this, view);
         presenter = new MapFragmentPresenter(this);
+        if (getActivity() != null) {
+            this.getActivity().setTitle(R.string.title_map);
+        }
 
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);

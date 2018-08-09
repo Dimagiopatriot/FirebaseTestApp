@@ -37,7 +37,6 @@ public class CustomClusterRenderer extends DefaultClusterRenderer<MarkerItem> {
     protected void onClusterItemRendered(MarkerItem clusterItem, Marker marker) {
         super.onClusterItemRendered(clusterItem, marker);
         presenter.showConcretePlaceInfoWindow(clusterItem, marker);
-        presenter.addUserMarker();
     }
 
     @Override

@@ -35,6 +35,7 @@ public class PlacesListFragmentPresenter {
     }
 
     public void retrievePlaces() {
+        Utils.checkNetworkConnection(fragment.getContext());
         dao.getPlaceListFromFirebase(adapter);
     }
 
@@ -47,6 +48,7 @@ public class PlacesListFragmentPresenter {
     }
 
     public void removePlace(Place place) {
+        Utils.checkNetworkConnection(fragment.getContext());
         dao.removePlaceFromFirebase(place);
         adapter.removeItem(place);
     }
@@ -55,9 +57,8 @@ public class PlacesListFragmentPresenter {
         Bundle args = new Bundle();
         args.putParcelable(Constants.BUNDLE_PLACE, place);
         if (fragment.getActivity() != null) {
-            fragment.getActivity().setTitle(R.string.title_map);
             Utils.navigateToFragment((AppCompatActivity) fragment.getActivity(), MapFragment.getInstance(args),
-                    R.id.main_activity_container, Constants.Tags.MAP_FRAGMENT);
+                    R.id.main_activity_container, Constants.Tags.MAP_FRAGMENT, true);
         }
     }
 }

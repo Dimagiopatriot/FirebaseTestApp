@@ -22,19 +22,16 @@ public class PartOneActivity extends AppCompatActivity {
             = item -> {
         switch (item.getItemId()) {
             case R.id.places_list:
-                setTitle(R.string.title_list);
                 Utils.navigateToFragment(this, new PlacesListFragment(),
-                        R.id.main_activity_container, PLACES_FRAGMENT);
+                        R.id.main_activity_container, PLACES_FRAGMENT, true);
                 return true;
             case R.id.places_map:
-                setTitle(R.string.title_map);
                 Utils.navigateToFragment(this, new MapFragment(),
-                        R.id.main_activity_container, MAP_FRAGMENT);
+                        R.id.main_activity_container, MAP_FRAGMENT, true);
                 return true;
             case R.id.profile:
-                setTitle(R.string.title_profile);
                 Utils.navigateToFragment(this, new ProfileFragment(),
-                        R.id.main_activity_container, PROFILE_FRAGMENT);
+                        R.id.main_activity_container, PROFILE_FRAGMENT, true);
                 return true;
         }
         return false;
@@ -47,9 +44,8 @@ public class PartOneActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_part_one);
-        setTitle(R.string.title_list);
         Utils.navigateToFragment(this, new PlacesListFragment(),
-                R.id.main_activity_container, PLACES_FRAGMENT);
+                R.id.main_activity_container, PLACES_FRAGMENT, false);
 
         ButterKnife.bind(this);
         navigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);

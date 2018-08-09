@@ -61,6 +61,7 @@ public class MapAdapter implements Adapter<Place> {
             MarkerItem placeMarkerItem = new PlaceMarkerItem(place);
             markers.add(placeMarkerItem);
         }
+        presenter.addUserMarker();
         clusterManager.addItems(markers);
         clusterManager.cluster();
     }

@@ -12,6 +12,7 @@ import com.sdmitriy.firebasetestapp.model.entity.Place;
 import com.sdmitriy.firebasetestapp.presenter.PlacesListFragmentPresenter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
@@ -32,6 +33,7 @@ public class FirebasePlaceListAdapter extends CommonRecyclerViewAdapter<Place, F
     public void addItems(List<Place> items) {
         if (items.size() != this.items.size() || !this.items.containsAll(items)) {
             this.items = items;
+            sortList();
             notifyDataSetChanged();
         }
     }
@@ -45,6 +47,10 @@ public class FirebasePlaceListAdapter extends CommonRecyclerViewAdapter<Place, F
     @Override
     public void onDataChangedResponse() {
         presenter.checkListEmptiness();
+    }
+
+    private void sortList() {
+        Collections.sort(items, (o1, o2) -> o1.getPlaceName().compareTo(o2.getPlaceName()));
     }
 
     @NonNull

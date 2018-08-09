@@ -8,6 +8,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.maps.android.clustering.ClusterManager;
 import com.sdmitriy.firebasetestapp.model.entity.MarkerItem;
+import com.sdmitriy.firebasetestapp.model.entity.PlaceMarkerItem;
 import com.sdmitriy.firebasetestapp.model.entity.Place;
 import com.sdmitriy.firebasetestapp.presenter.MapFragmentPresenter;
 import com.sdmitriy.firebasetestapp.util.CustomClusterRenderer;
@@ -57,15 +58,15 @@ public class MapAdapter implements Adapter<Place> {
         List<MarkerItem> markers = new ArrayList<>();
         clusterManager.clearItems();
         for (Place place : places) {
-            MarkerItem markerItem = new MarkerItem(place);
-            markers.add(markerItem);
+            MarkerItem placeMarkerItem = new PlaceMarkerItem(place);
+            markers.add(placeMarkerItem);
         }
         clusterManager.addItems(markers);
         clusterManager.cluster();
     }
 
-    public void createMarker(Place place) {
-        clusterManager.addItem(new MarkerItem(place));
+    public void createMarker(MarkerItem markerItem) {
+        clusterManager.addItem(markerItem);
         clusterManager.cluster();
     }
 

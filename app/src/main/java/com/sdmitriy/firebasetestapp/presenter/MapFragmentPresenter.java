@@ -12,7 +12,9 @@ import com.sdmitriy.firebasetestapp.model.adapter.MapAdapter;
 import com.sdmitriy.firebasetestapp.model.dao.FirebaseDao;
 import com.sdmitriy.firebasetestapp.model.dao.FirebaseDaoImpl;
 import com.sdmitriy.firebasetestapp.model.entity.MarkerItem;
+import com.sdmitriy.firebasetestapp.model.entity.PlaceMarkerItem;
 import com.sdmitriy.firebasetestapp.model.entity.Place;
+import com.sdmitriy.firebasetestapp.model.entity.UserMarkerItem;
 import com.sdmitriy.firebasetestapp.util.Constants;
 import com.sdmitriy.firebasetestapp.util.LocationHelper;
 import com.sdmitriy.firebasetestapp.util.Utils;
@@ -27,6 +29,7 @@ public class MapFragmentPresenter {
     private Place concretePlace;
     private String markerId;
     private boolean showOnce = true;
+    private Location userLocation;
 
     public MapFragmentPresenter(MapFragment mapFragment) {
         this.fragment = mapFragment;
@@ -51,6 +54,14 @@ public class MapFragmentPresenter {
 
     public void moveCameraToUserPosition(Location currentLocation) {
         mapAdapter.moveCameraToPosition(currentLocation.getLatitude(), currentLocation.getLongitude(), 12.0f);
+        userLocation = currentLocation;
+    }
+
+    public void addUserMarker() {
+        if (userLocation != null && showOnce) {
+            mapAdapter.createMarker(new UserMarkerItem(userLocation));
+            showOnce = false;
+        }
     }
 
     private void initializeLocationHelper(MapFragment mapFragment) {
@@ -93,7 +104,7 @@ public class MapFragmentPresenter {
     }
 
     public void showConcretePlaceInfoWindow(MarkerItem item, Marker marker) {
-        if (concretePlace != null && concretePlace.equals(item.getPlace()) && showOnce) {
+        if (concretePlace != null && concretePlace.equals(((PlaceMarkerItem) item).getPlace()) && showOnce) {
             marker.showInfoWindow();
             markerId = marker.getId();
             showOnce = false;
@@ -104,7 +115,8 @@ public class MapFragmentPresenter {
         placeName = Utils.formatString(placeName);
         Place place = new Place(placeName, coordinates.latitude, coordinates.longitude);
         dao.addPlaceToFirebase(place);
-        mapAdapter.createMarker(place);
+        MarkerItem markerItem = new PlaceMarkerItem(place);
+        mapAdapter.createMarker(markerItem);
     }
 
     public Context getContext() {

@@ -15,7 +15,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBPLotck3RcUgn7tx4maLqFrVsihAapCHc" />
@@ -31,11 +30,16 @@
         </activity>
         <activity
             android:name=".PartOneActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_part_one" />
+            android:label="@string/title_activity_part_one"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".LoginActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".PartTwoActivity"
+            android:label="@string/title_activity_part_two"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
     </application>
 
 </manifest>

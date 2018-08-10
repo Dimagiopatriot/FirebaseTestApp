@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">FirebaseTestApp</string>
     <string name="title_activity_part_one">PartOneActivity</string>
+    <string name="title_activity_part_two">PartTwoActivity</string>
     <string name="title_list">Список</string>
     <string name="title_map">Карта</string>
     <string name="title_profile">Профиль</string>

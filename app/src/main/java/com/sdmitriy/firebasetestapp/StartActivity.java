@@ -32,6 +32,7 @@ public class StartActivity extends AppCompatActivity {
 
     @OnClick(R.id.part_two_button)
     public void goToPartTwo() {
-        Toast.makeText(this, "Not ready yet", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, PartTwoActivity.class);
+        startActivity(intent);
     }
 }

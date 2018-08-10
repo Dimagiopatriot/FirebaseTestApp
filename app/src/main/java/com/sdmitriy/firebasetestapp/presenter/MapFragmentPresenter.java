@@ -12,8 +12,8 @@ import com.sdmitriy.firebasetestapp.model.adapter.MapAdapter;
 import com.sdmitriy.firebasetestapp.model.dao.FirebaseDao;
 import com.sdmitriy.firebasetestapp.model.dao.FirebaseDaoImpl;
 import com.sdmitriy.firebasetestapp.model.entity.MarkerItem;
-import com.sdmitriy.firebasetestapp.model.entity.PlaceMarkerItem;
 import com.sdmitriy.firebasetestapp.model.entity.Place;
+import com.sdmitriy.firebasetestapp.model.entity.PlaceMarkerItem;
 import com.sdmitriy.firebasetestapp.model.entity.UserMarkerItem;
 import com.sdmitriy.firebasetestapp.util.Constants;
 import com.sdmitriy.firebasetestapp.util.LocationHelper;
@@ -55,6 +55,7 @@ public class MapFragmentPresenter {
     public void moveCameraToUserPosition(Location currentLocation) {
         mapAdapter.moveCameraToPosition(currentLocation.getLatitude(), currentLocation.getLongitude(), 12.0f);
         userLocation = currentLocation;
+        mapAdapter.createMarker(new UserMarkerItem(userLocation));
     }
 
     public void addUserMarker() {

@@ -7,4 +7,15 @@
     <string name="title_profile">Профиль</string>
 
     <string name="no_items_message">НЕТ НИ ОДНОЙ ТОЧКИ</string>
+
+    <!-- Sing up -->
+    <string name="sign_up">Sign Up</string>
+    <string name="username">Username</string>
+    <string name="email">Email Address</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="next">Next</string>
+    <string name="already_question">Already have account? </string>
+    <string name="sign_in">Sign In</string>
+    <string name="write_here">Write here</string>
 </resources>

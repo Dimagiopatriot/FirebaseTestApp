@@ -39,7 +39,7 @@
             android:name=".PartTwoActivity"
             android:label="@string/title_activity_part_two"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+            android:theme="@style/PartTwoActivityTheme"/>
     </application>
 
 </manifest>

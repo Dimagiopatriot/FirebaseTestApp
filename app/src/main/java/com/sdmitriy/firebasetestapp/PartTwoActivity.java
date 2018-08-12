@@ -18,6 +18,6 @@ public class PartTwoActivity extends AppCompatActivity {
         winParams.flags &= ~WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
         window.setAttributes(winParams);
         window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-        setContentView(R.layout.sign_up_fragment);
+        setContentView(R.layout.activity_part_two);
     }
 }

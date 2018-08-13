@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="320dp"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/footballer_player" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.45"
+        android:background="@drawable/sing_up_color_layer" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginEnd="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginBottom="56dp">
+
+        <TextView
+            android:id="@+id/article_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Integer ut placerat purued non dignissim neque. "
+            android:textColor="@color/colorWhite"
+            android:textSize="29sp" />
+
+        <TextView
+            android:id="@+id/likes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/article_name"
+            android:layout_marginTop="21dp"
+            android:drawableLeft="@drawable/ic_likes"
+            android:drawablePadding="8dp"
+            android:drawableStart="@drawable/ic_likes"
+            android:text="15 likes"
+            android:textColor="@color/colorTextGrey" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/article_name"
+            android:layout_marginLeft="26dp"
+            android:layout_marginStart="26dp"
+            android:layout_marginTop="21dp"
+            android:layout_toEndOf="@+id/likes"
+            android:layout_toRightOf="@+id/likes"
+            android:drawableLeft="@drawable/ic_comment"
+            android:drawablePadding="8dp"
+            android:drawableStart="@drawable/ic_comment"
+            android:text="85 Comments"
+            android:textColor="@color/colorTextGrey" />
+
+
+    </RelativeLayout>
+
+</FrameLayout>

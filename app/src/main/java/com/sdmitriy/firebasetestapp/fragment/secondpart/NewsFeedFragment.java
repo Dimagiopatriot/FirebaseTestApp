@@ -68,7 +68,7 @@ public class NewsFeedFragment extends Fragment {
     private void initCategories() {
         CategoryPagerAdapter categoryPagerAdapter = new CategoryPagerAdapter(getContext(), getCategoryPagerItems());
 
-        //categoryTabs.setupWithViewPager(categoryViewPager, true);
+        categoryTabs.setupWithViewPager(categoryViewPager, true);
         categoryViewPager.setAdapter(categoryPagerAdapter);
     }
 

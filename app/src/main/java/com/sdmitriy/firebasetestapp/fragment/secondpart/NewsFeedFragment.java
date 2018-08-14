@@ -11,9 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.sdmitriy.firebasetestapp.R;
-import com.sdmitriy.firebasetestapp.model.adapter.secondpart.NewsFeedPagerAdapter;
-import com.sdmitriy.firebasetestapp.model.entity.secondpart.NewsFeedItem;
+import com.sdmitriy.firebasetestapp.model.adapter.secondpart.CategoryPagerAdapter;
+import com.sdmitriy.firebasetestapp.model.adapter.secondpart.HotNewsFeedPagerAdapter;
+import com.sdmitriy.firebasetestapp.model.entity.secondpart.CategoryItem;
+import com.sdmitriy.firebasetestapp.model.entity.secondpart.CategoryTabItem;
+import com.sdmitriy.firebasetestapp.model.entity.secondpart.HotNewsTabItem;
 import com.sdmitriy.firebasetestapp.model.entity.secondpart.ViewPagerAdapterItem;
+import com.sdmitriy.firebasetestapp.util.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,12 +32,20 @@ import butterknife.Unbinder;
 
 public class NewsFeedFragment extends Fragment {
 
+    private final int TOP_NEWS_NUMBER = 5;
+    private final int CATEGORIES_NUMBER = 4;
+
     Unbinder unbinder;
 
     @BindView(R.id.tab_dots)
-    TabLayout tabLayout;
+    TabLayout dotsLayout;
     @BindView(R.id.pager)
-    ViewPager viewPager;
+    ViewPager hotNewsViewPager;
+
+    @BindView(R.id.category_tabs)
+    TabLayout categoryTabs;
+    @BindView(R.id.category_view_pager)
+    ViewPager categoryViewPager;
 
     @Nullable
     @Override
@@ -41,17 +53,37 @@ public class NewsFeedFragment extends Fragment {
         View view = inflater.inflate(R.layout.newsfeed_part_two_fragment, container, false);
         unbinder = ButterKnife.bind(this, view);
 
-        NewsFeedPagerAdapter newsFeedPagerAdapter = new NewsFeedPagerAdapter(getContext(), getTopViewPagerItems());
-
-        tabLayout.setupWithViewPager(viewPager, true);
-        viewPager.setAdapter(newsFeedPagerAdapter);
+        initHotNews();
+        initCategories();
         return view;
+    }
+
+    private void initHotNews() {
+        HotNewsFeedPagerAdapter hotNewsFeedAdapter = new HotNewsFeedPagerAdapter(getContext(), getTopViewPagerItems());
+
+        dotsLayout.setupWithViewPager(hotNewsViewPager, true);
+        hotNewsViewPager.setAdapter(hotNewsFeedAdapter);
+    }
+
+    private void initCategories() {
+        CategoryPagerAdapter categoryPagerAdapter = new CategoryPagerAdapter(getContext(), getCategoryPagerItems());
+
+        //categoryTabs.setupWithViewPager(categoryViewPager, true);
+        categoryViewPager.setAdapter(categoryPagerAdapter);
     }
 
     private List<ViewPagerAdapterItem> getTopViewPagerItems() {
         List<ViewPagerAdapterItem> items = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            items.add(new NewsFeedItem());
+        for (int i = 0; i < TOP_NEWS_NUMBER; i++) {
+            items.add(new HotNewsTabItem());
+        }
+        return items;
+    }
+
+    private List<ViewPagerAdapterItem> getCategoryPagerItems() {
+        List<ViewPagerAdapterItem> items = new ArrayList<>();
+        for (int i = 0; i < CATEGORIES_NUMBER; i++) {
+            items.add(new CategoryTabItem());
         }
         return items;
     }

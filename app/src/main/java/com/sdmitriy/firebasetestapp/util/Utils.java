@@ -10,7 +10,12 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import com.sdmitriy.firebasetestapp.R;
 import com.sdmitriy.firebasetestapp.model.entity.UserData;
+import com.sdmitriy.firebasetestapp.model.entity.secondpart.CategoryItem;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.sdmitriy.firebasetestapp.util.Constants.SharedConstants.USER_EMAIL;
 import static com.sdmitriy.firebasetestapp.util.Constants.SharedConstants.USER_ID;
@@ -87,5 +92,18 @@ public class Utils {
         if (context != null && !Utils.isNetworkAvailable(context)) {
             Toast.makeText(context, "No Internet", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public static List<CategoryItem> getCategoryItemListForRecyclerView() {
+        List<CategoryItem> categoryItems = new ArrayList<>();
+        categoryItems.add(new CategoryItem(R.drawable.image_item_one,
+                "Morbi per tincidunt tellus sit of amet eros laoreet.", 26, 32, false));
+        categoryItems.add(new CategoryItem(R.drawable.image_item_two,
+                "Fusce ornare cursus masspretium tortor integer placera.", 15, 21, true));
+        categoryItems.add(new CategoryItem(R.drawable.image_item_three,
+                "Maecenas eu risus blanscelerisque massa non amcorpe.", 36, 15, false));
+        categoryItems.add(new CategoryItem(R.drawable.image_item_four,
+                "Maecenas eu risus blanscelerisque massa non amcorpe.", 11, 9, false));
+        return categoryItems;
     }
 }

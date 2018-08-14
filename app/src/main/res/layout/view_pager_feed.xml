@@ -20,11 +20,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        android:layout_marginBottom="56dp"
         android:layout_marginEnd="25dp"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginBottom="56dp">
+        android:layout_marginStart="25dp">
 
         <TextView
             android:id="@+id/article_name"
@@ -34,30 +34,48 @@
             android:textColor="@color/colorWhite"
             android:textSize="29sp" />
 
+        <ImageView
+            android:id="@+id/ic_like"
+            android:layout_width="17dp"
+            android:layout_height="16dp"
+            android:layout_below="@id/article_name"
+            android:layout_marginTop="23dp"
+            android:src="@drawable/ic_likes" />
+
         <TextView
             android:id="@+id/likes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/article_name"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="21dp"
-            android:drawableLeft="@drawable/ic_likes"
-            android:drawablePadding="8dp"
-            android:drawableStart="@drawable/ic_likes"
+            android:layout_toRightOf="@id/ic_like"
+            android:layout_toEndOf="@id/ic_like"
             android:text="15 likes"
             android:textColor="@color/colorTextGrey" />
+
+        <ImageView
+            android:id="@+id/ic_comment"
+            android:layout_width="17dp"
+            android:layout_height="16dp"
+            android:layout_below="@id/article_name"
+            android:layout_marginTop="23dp"
+            android:layout_marginLeft="26dp"
+            android:layout_marginStart="26dp"
+            android:layout_toEndOf="@id/likes"
+            android:layout_toRightOf="@id/likes"
+            android:src="@drawable/ic_comment" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/article_name"
-            android:layout_marginLeft="26dp"
-            android:layout_marginStart="26dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="21dp"
-            android:layout_toEndOf="@+id/likes"
-            android:layout_toRightOf="@+id/likes"
-            android:drawableLeft="@drawable/ic_comment"
-            android:drawablePadding="8dp"
-            android:drawableStart="@drawable/ic_comment"
+            android:layout_toEndOf="@+id/ic_comment"
+            android:layout_toRightOf="@+id/ic_comment"
             android:text="85 Comments"
             android:textColor="@color/colorTextGrey" />
 

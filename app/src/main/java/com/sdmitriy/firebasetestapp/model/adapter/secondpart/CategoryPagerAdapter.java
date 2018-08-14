@@ -2,6 +2,7 @@ package com.sdmitriy.firebasetestapp.model.adapter.secondpart;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,7 +21,6 @@ public class CategoryPagerAdapter extends PagerAdapter {
 
     private Context context;
     private List<ViewPagerAdapterItem> items;
-    private CategoryRecyclerViewAdapter recyclerViewAdapter;
 
 
     public CategoryPagerAdapter(Context context, List<ViewPagerAdapterItem> items) {
@@ -41,7 +41,7 @@ public class CategoryPagerAdapter extends PagerAdapter {
 
     private void initRecyclerView(ViewGroup layout) {
         RecyclerView tabRecyclerView = layout.findViewById(R.id.category_recycler_view);
-        recyclerViewAdapter = new CategoryRecyclerViewAdapter(Utils.getCategoryItemListForRecyclerView());
+        CategoryRecyclerViewAdapter recyclerViewAdapter = new CategoryRecyclerViewAdapter(Utils.getCategoryItemListForRecyclerView());
         tabRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         tabRecyclerView.setAdapter(recyclerViewAdapter);
     }
@@ -51,7 +51,21 @@ public class CategoryPagerAdapter extends PagerAdapter {
         return items.size();
     }
 
-
+    @Nullable
+    @Override
+    public CharSequence getPageTitle(int position) {
+        switch (position) {
+            case 0:
+                return "All";
+            case 1:
+                return "Featured";
+            case 2:
+                return "Popular";
+            case 3:
+                return "My Favorites";
+        }
+        return null;
+    }
 
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {

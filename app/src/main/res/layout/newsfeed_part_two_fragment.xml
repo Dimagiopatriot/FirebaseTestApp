@@ -40,35 +40,13 @@
             app:tabGravity="fill"
             app:tabMode="scrollable"
             app:tabSelectedTextColor="@color/colorWhite"
-            app:tabTextColor="@color/unSelectedTabColor">
-
-            <android.support.design.widget.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="All" />
-
-            <android.support.design.widget.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Featured" />
-
-            <android.support.design.widget.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Popular" />
-
-            <android.support.design.widget.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="My Favorites" />
-
-        </android.support.design.widget.TabLayout>
-
+            app:tabTextColor="@color/unSelectedTabColor"
+            app:tabIndicatorColor="@color/colorWhite"/>
 
         <android.support.v4.view.ViewPager
             android:id="@+id/category_view_pager"
             android:layout_width="match_parent"
-            android:layout_height="fill_parent" />
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 </LinearLayout>

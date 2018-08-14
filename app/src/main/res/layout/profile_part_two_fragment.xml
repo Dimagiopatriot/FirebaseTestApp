@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/background_height"
+                android:scaleType="centerCrop"
+                android:src="@drawable/profile_background" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/background_height"
+                android:alpha="0.4"
+                android:scaleType="centerCrop"
+                android:src="@drawable/sing_up_color_layer" />
+
+            <ImageView
+                android:layout_width="101dp"
+                android:layout_height="101dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="220dp"
+                android:background="@color/colorWhite"
+                android:padding="3dp"
+                android:src="@drawable/some_guy" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="223dp"
+                android:drawablePadding="5dp"
+                android:drawableTop="@drawable/ic_facebook"
+                android:text="786 Followers"
+                android:textColor="@color/colorTextGrey"
+                android:textSize="11sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginEnd="32dp"
+                android:layout_marginRight="32dp"
+                android:layout_marginTop="223dp"
+                android:drawablePadding="5dp"
+                android:drawableTop="@drawable/ic_twitter"
+                android:text="456 Followers"
+                android:textColor="@color/colorTextGrey"
+                android:textSize="11sp" />
+
+        </FrameLayout>
+
+
+        <LinearLayout style="@style/ProfileItemsHolderStyle">
+
+            <TextView
+                style="@style/ProfileFieldsName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Username" />
+
+            <TextView
+                style="@style/ProfileUserData"
+                android:text="sandeepkasundra" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorProfileDivider" />
+
+        <LinearLayout style="@style/ProfileItemsHolderStyle">
+
+            <TextView
+                style="@style/ProfileFieldsName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email" />
+
+            <TextView
+                style="@style/ProfileUserData"
+                android:text="sandeepkasundra@gmail.com" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorProfileDivider" />
+
+        <LinearLayout style="@style/ProfileItemsHolderStyle">
+
+            <TextView
+                style="@style/ProfileFieldsName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Password" />
+
+            <TextView
+                style="@style/ProfileUserData"
+                android:text="****************" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorProfileDivider" />
+
+        <LinearLayout style="@style/ProfileItemsHolderStyle">
+
+            <TextView
+                style="@style/ProfileFieldsName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Facebook" />
+
+            <Switch
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:layout_marginRight="15dp"
+                android:checked="true"
+                android:gravity="right" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorProfileDivider" />
+
+        <LinearLayout style="@style/ProfileItemsHolderStyle">
+
+            <TextView
+                style="@style/ProfileFieldsName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Twitter" />
+
+            <Switch
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:layout_marginRight="15dp"
+                android:checked="false"
+                android:gravity="right" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorProfileDivider" />
+
+        <LinearLayout style="@style/ProfileItemsHolderStyle">
+
+            <TextView
+                style="@style/ProfileFieldsName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Google+" />
+
+            <TextView
+                style="@style/ProfileUserData"
+                android:text="Connect" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

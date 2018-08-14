@@ -48,7 +48,7 @@ public class StartPartTwoFragment extends Fragment {
 
     @OnClick(R.id.screen_three)
     public void goToThirdScreen() {
-
+        Utils.navigateToFragment(activity, new ProfileFragment(), R.id.fragment_container, "ProfilePartTwo", true);
     }
 
     @OnClick(R.id.screen_four)

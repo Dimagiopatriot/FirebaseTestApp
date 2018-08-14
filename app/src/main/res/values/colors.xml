@@ -9,4 +9,6 @@
     <color name="colorTextGrey">#ffa2a1b8</color>
     <color name="unSelectedTabColor">#fffeb2c1</color>
     <color name="colorTextBlue">#ff151431</color>
+
+    <color name="colorProfileDivider">#ffeeeeee</color>
 </resources>

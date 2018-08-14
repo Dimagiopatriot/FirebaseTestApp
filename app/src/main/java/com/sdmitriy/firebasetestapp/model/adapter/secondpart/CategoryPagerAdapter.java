@@ -42,14 +42,16 @@ public class CategoryPagerAdapter extends PagerAdapter {
     private void initRecyclerView(ViewGroup layout) {
         RecyclerView tabRecyclerView = layout.findViewById(R.id.category_recycler_view);
         recyclerViewAdapter = new CategoryRecyclerViewAdapter(Utils.getCategoryItemListForRecyclerView());
-        tabRecyclerView.setAdapter(recyclerViewAdapter);
         tabRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+        tabRecyclerView.setAdapter(recyclerViewAdapter);
     }
 
     @Override
     public int getCount() {
         return items.size();
     }
+
+
 
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {

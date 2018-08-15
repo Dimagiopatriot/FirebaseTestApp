@@ -39,4 +39,8 @@ public class CategoryItem {
     public void setLikedByUser(boolean likedByUser) {
         isLikedByUser = likedByUser;
     }
+
+    public void setLikesCount(int likesCount) {
+        this.likesCount = likesCount;
+    }
 }

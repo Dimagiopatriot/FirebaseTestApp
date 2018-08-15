@@ -45,6 +45,11 @@ public class CategoryRecyclerViewAdapter extends CommonRecyclerViewAdapter<Categ
         holder.likes.setText(likesCount);
         holder.comments.setText(commentsCount);
         holder.articleTitle.setText(categoryItem.getTitle());
+        if (categoryItem.isLikedByUser()) {
+            holder.itemLike.setImageResource(R.drawable.ic_likes);
+        } else {
+            holder.itemLike.setImageResource(R.drawable.ic_unlike);
+        }
 
         Picasso.get().load(categoryItem.getPictureResource()).into(holder.itemImage);
     }
@@ -83,6 +88,8 @@ public class CategoryRecyclerViewAdapter extends CommonRecyclerViewAdapter<Categ
         TextView likes;
         @BindView(R.id.comments)
         TextView comments;
+        @BindView(R.id.ic_like)
+        ImageView itemLike;
 
         CategoryItem categoryItem;
 
@@ -91,15 +98,20 @@ public class CategoryRecyclerViewAdapter extends CommonRecyclerViewAdapter<Categ
             ButterKnife.bind(this, itemView);
         }
 
-        @OnClick(R.id.ic_like)
+        @OnClick({R.id.ic_like, R.id.likes})
         void changeLikeDrawable() {
+            int likesCount = categoryItem.getLikesCount();
             if (categoryItem.isLikedByUser()) {
-                likes.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_unlike, 0, 0, 0);
+                likesCount--;
+                itemLike.setImageResource(R.drawable.ic_unlike);
                 categoryItem.setLikedByUser(false);
             } else {
-                likes.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_likes, 0, 0, 0);
+                likesCount++;
+                itemLike.setImageResource(R.drawable.ic_likes);
                 categoryItem.setLikedByUser(true);
             }
+            categoryItem.setLikesCount(likesCount);
+            likes.setText(String.valueOf(likesCount) + " Likes");
         }
     }
 }

@@ -69,9 +69,10 @@
 
     <style name="CategoryItemStyle">
         <item name="android:textColor">@color/colorTextGrey</item>
-        <item name="android:layout_marginLeft">7dp</item>
-        <item name="android:textSize">12sp</item>
-        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_marginStart">5dp</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:layout_marginTop">11dp</item>
     </style>
 
     <style name="DividerStyle">

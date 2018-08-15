@@ -5,6 +5,7 @@
     <color name="colorAccent">#ffff2d55</color>
     <color name="colorCluster">#004D40</color>
     <color name="colorWhite">#FFFFFFFF</color>
+    <color name="colorGreen">#ff09c863</color>
 
     <color name="colorTextGrey">#ffa2a1b8</color>
     <color name="unSelectedTabColor">#fffeb2c1</color>

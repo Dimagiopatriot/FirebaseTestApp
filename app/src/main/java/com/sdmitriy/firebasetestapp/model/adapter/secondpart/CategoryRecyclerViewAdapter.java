@@ -111,7 +111,8 @@ public class CategoryRecyclerViewAdapter extends CommonRecyclerViewAdapter<Categ
                 categoryItem.setLikedByUser(true);
             }
             categoryItem.setLikesCount(likesCount);
-            likes.setText(String.valueOf(likesCount) + " Likes");
+            String likesString = String.valueOf(likesCount) + " Likes";
+            likes.setText(likesString);
         }
     }
 }

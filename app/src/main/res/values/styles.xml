@@ -26,6 +26,7 @@
         <item name="android:textColor">@color/colorTextGrey</item>
         <item name="android:layout_marginBottom">29dp</item>
         <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:fontFamily">@font/montserrat</item>
     </style>
 
     <style name="SingUpEditText">
@@ -39,6 +40,7 @@
         <item name="android:layout_gravity">center_horizontal</item>
         <item name="android:gravity">center</item>
         <item name="android:textColorHint">@color/colorWhite</item>
+        <item name="android:fontFamily">@font/montserrat</item>
     </style>
 
     <style name="BoldText">

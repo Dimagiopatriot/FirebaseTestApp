@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/search_button"
+        android:icon="@drawable/ic_search"
+        android:iconTint="@color/colorWhite"
+        android:orderInCategory="100"
+        android:title=""
+        android:visible="false"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/done_editing_button"
+        android:icon="@drawable/ic_edit"
+        android:iconTint="@color/colorWhite"
+        android:orderInCategory="100"
+        android:title=""
+        android:visible="false"
+        app:showAsAction="always" />
+
+</menu>

@@ -6,10 +6,17 @@
     android:orientation="vertical"
     tools:context="com.sdmitriy.firebasetestapp.PartTwoActivity">
 
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbarTop"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
+        android:layout_marginTop="24dp"
         android:background="@null"
         android:minHeight="?attr/actionBarSize">
 
@@ -17,14 +24,11 @@
             android:id="@+id/screen_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorWhite"
+            android:fontFamily="@font/montserrat"
+            android:textSize="16sp"
             android:layout_gravity="center" />
 
     </android.support.v7.widget.Toolbar>
-
-    <FrameLayout
-        android:id="@+id/fragment_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1" />
 
 </FrameLayout>

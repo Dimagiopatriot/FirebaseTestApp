@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -41,7 +43,15 @@ public class TimelineFragment extends Fragment {
 
         calendarCarouselView.setLayoutManager(new CenterZoomLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         calendarCarouselView.setAdapter(new CarouselAdapter(Utils.getCarouselItems()));
+        setHasOptionsMenu(true);
         return view;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.getItem(0).setVisible(true);
+        menu.getItem(1).setVisible(false);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override

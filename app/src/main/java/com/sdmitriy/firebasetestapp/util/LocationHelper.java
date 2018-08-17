@@ -172,6 +172,7 @@ public class LocationHelper implements LocationListener {
     @Override
     public void onLocationChanged(Location location) {
         lastLocation = location;
+        presenter.moveCameraToUserPosition(lastLocation);
     }
 
     public void onRequestPermissionResult(int requestCode, int[] grantResults) {
@@ -188,8 +189,12 @@ public class LocationHelper implements LocationListener {
                 switch (resultCode) {
                     case Activity.RESULT_OK:
                         // All required changes were successfully made
-                        checkGoogleClientConnection();
-                        getLastLocation();
+                        if (!checkPermissions()) {
+                            startLocationPermissionRequest();
+                        } else {
+                            checkGoogleClientConnection();
+                            getLastLocation();
+                        }
                         break;
                     case Activity.RESULT_CANCELED:
                         // The user was asked to change settings, but chose not to do

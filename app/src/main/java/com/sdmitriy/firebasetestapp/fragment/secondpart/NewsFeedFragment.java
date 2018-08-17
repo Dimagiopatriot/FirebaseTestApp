@@ -7,6 +7,8 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -55,7 +57,15 @@ public class NewsFeedFragment extends Fragment {
 
         initHotNews();
         initCategories();
+        setHasOptionsMenu(true);
         return view;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.getItem(0).setVisible(true);
+        menu.getItem(1).setVisible(false);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     private void initHotNews() {

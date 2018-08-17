@@ -21,21 +21,14 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="19dp"
-                android:layout_marginStart="19dp"
-                android:layout_marginTop="46dp"
-                app:srcCompat="@drawable/ic_arrow_back" />
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="37dp"
+                android:layout_marginTop="82dp"
                 android:text="@string/sign_up"
                 android:textColor="@color/colorWhite"
+                android:fontFamily="@font/montserrat"
                 android:textSize="29sp" />
 
             <TextView
@@ -111,6 +104,7 @@
                 android:layout_marginRight="33dp"
                 android:layout_marginStart="33dp"
                 android:background="@drawable/sing_up_button"
+                android:textAllCaps="false"
                 android:text="@string/next"
                 android:textColor="@color/colorWhite" />
 

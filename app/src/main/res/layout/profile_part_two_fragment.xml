@@ -124,13 +124,24 @@
                 android:layout_height="wrap_content"
                 android:text="Facebook" />
 
-            <Switch
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="15dp"
-                android:layout_marginRight="15dp"
-                android:checked="true"
-                android:gravity="right" />
+                android:orientation="vertical">
+
+                <Switch
+                    android:layout_width="51dp"
+                    android:layout_height="26dp"
+                    android:layout_gravity="right"
+                    android:textOn=""
+                    android:textOff=""
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginRight="15dp"
+                    android:checked="true"
+                    android:switchMinWidth="51dp"
+                    android:thumb="@drawable/custom_switch_thumb"
+                    android:track="@drawable/custom_switch_track" />
+            </LinearLayout>
         </LinearLayout>
 
         <View
@@ -146,13 +157,24 @@
                 android:layout_height="wrap_content"
                 android:text="Twitter" />
 
-            <Switch
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="15dp"
-                android:layout_marginRight="15dp"
-                android:checked="false"
-                android:gravity="right" />
+                android:orientation="vertical">
+
+                <Switch
+                    android:layout_width="51dp"
+                    android:layout_height="26dp"
+                    android:layout_gravity="right"
+                    android:textOn=""
+                    android:textOff=""
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginRight="15dp"
+                    android:checked="false"
+                    android:switchMinWidth="51dp"
+                    android:thumb="@drawable/custom_switch_thumb"
+                    android:track="@drawable/custom_switch_track" />
+            </LinearLayout>
         </LinearLayout>
 
         <View

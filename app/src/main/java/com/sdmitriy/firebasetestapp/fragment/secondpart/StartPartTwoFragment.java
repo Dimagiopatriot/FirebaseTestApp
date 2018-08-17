@@ -53,7 +53,7 @@ public class StartPartTwoFragment extends Fragment {
 
     @OnClick(R.id.screen_four)
     public void goToFourthScreen() {
-
+        Utils.navigateToFragment(activity, new TimelineFragment(), R.id.fragment_container, "Timeline", true);
     }
 
     @Override

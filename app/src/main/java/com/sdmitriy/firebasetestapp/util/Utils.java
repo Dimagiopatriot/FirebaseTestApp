@@ -12,9 +12,13 @@ import android.widget.Toast;
 
 import com.sdmitriy.firebasetestapp.R;
 import com.sdmitriy.firebasetestapp.model.entity.UserData;
+import com.sdmitriy.firebasetestapp.model.entity.secondpart.CarouselItem;
 import com.sdmitriy.firebasetestapp.model.entity.secondpart.CategoryItem;
+import com.sdmitriy.firebasetestapp.model.entity.secondpart.TimelineItem;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static com.sdmitriy.firebasetestapp.util.Constants.SharedConstants.USER_EMAIL;
@@ -105,5 +109,36 @@ public class Utils {
         categoryItems.add(new CategoryItem(R.drawable.image_item_four,
                 "Maecenas eu risus blanscelerisque massa non amcorpe.", 11, 9, false));
         return categoryItems;
+    }
+
+    public static List<TimelineItem> getTimelineEvents() {
+        List<TimelineItem> timelineEvents = new ArrayList<>();
+
+        timelineEvents.add(new TimelineItem(true, "4:45", "pm",
+                "Revice Wireframe", "Company Work"));
+
+        TimelineItem secondEvent = new TimelineItem(true, "2:20", "pm",
+                "Finish Home Screen", "Home App");
+        secondEvent.setImagesDrawablesResources(Arrays.asList(R.drawable.photo_one, R.drawable.photo_two, R.drawable.photo_three));
+        timelineEvents.add(secondEvent);
+
+        timelineEvents.add(new TimelineItem(false, "11:20", "am",
+                "External Work", "Company Work"));
+
+        TimelineItem fourthEvent = new TimelineItem(true, "9:40", "am",
+                "Create Workflow", "Internal Project");
+        fourthEvent.setImagesDrawablesResources(Arrays.asList(R.drawable.photo_four, R.drawable.photo_five));
+        timelineEvents.add(fourthEvent);
+        return timelineEvents;
+    }
+
+    public static List<CarouselItem> getCarouselItems() {
+        List<CarouselItem> items = new ArrayList<>();
+        items.add(new CarouselItem(21, "February", "6 events"));
+        items.add(new CarouselItem(22, "February", "9 events"));
+        items.add(new CarouselItem(23, "February", "15 events"));
+        items.add(new CarouselItem(24, "February", "9 events"));
+        items.add(new CarouselItem(25, "February", "10 events"));
+        return items;
     }
 }

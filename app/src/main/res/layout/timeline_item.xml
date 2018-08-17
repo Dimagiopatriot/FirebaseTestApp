@@ -11,29 +11,37 @@
         android:layout_marginTop="24dp"
         android:orientation="horizontal">
 
-        <ImageView
-            android:layout_width="9dp"
-            android:layout_height="9dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="23dp"
-            android:layout_marginRight="20dp"
-            tools:src="@drawable/timeline_green_status" />
-
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="155dp"
             android:layout_height="wrap_content"
-            android:layout_marginRight="8dp"
-            android:textColor="@color/colorTextBlue"
-            android:textSize="22sp"
-            tools:text="2:20" />
+            android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="45dp"
-            android:textColor="@color/colorTextGrey"
-            android:textSize="12sp"
-            tools:text="pm" />
+            <ImageView
+                android:id="@+id/event_status"
+                android:layout_width="9dp"
+                android:layout_height="9dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="23dp"
+                android:layout_marginRight="20dp"
+                tools:src="@drawable/timeline_green_status" />
+
+            <TextView
+                android:id="@+id/time_event"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                android:textColor="@color/colorTextBlue"
+                android:textSize="22sp"
+                tools:text="2:20" />
+            <TextView
+                android:id="@+id/afternoon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorTextGrey"
+                android:textSize="12sp"
+                tools:text="pm" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -42,6 +50,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/event_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorTextBlue"
@@ -49,6 +58,7 @@
                 tools:text="Revice Wireframe" />
 
             <TextView
+                android:id="@+id/place_event"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -57,6 +67,7 @@
                 tools:text="Company Work" />
 
             <android.support.v7.widget.RecyclerView
+                android:id="@+id/photos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp" />
@@ -67,5 +78,5 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/colorProfileDivider"/>
+        android:background="@color/colorProfileDivider" />
 </LinearLayout>

@@ -107,7 +107,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
                 .setTitle("Enter place name")
                 .setPositiveButton("OK", (dialog, which) ->
                         presenter.savePlaceToDatabase(latLng, placeName.getText().toString()))
-                .setNegativeButton("Cancel", (dialog, which) -> {});
+                .setNegativeButton("Cancel", (dialog, which) -> {
+                });
         AlertDialog alertDialog = alertBuilder.create();
         alertDialog.show();
         presenter.resetMarkerId();

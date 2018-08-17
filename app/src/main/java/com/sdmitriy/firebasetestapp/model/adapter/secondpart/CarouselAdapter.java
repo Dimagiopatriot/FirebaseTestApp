@@ -59,6 +59,7 @@ public class CarouselAdapter extends CommonRecyclerViewAdapter<CarouselItem, Car
     class Holder extends RecyclerView.ViewHolder {
 
         TextView day, month, events;
+
         public Holder(View itemView) {
             super(itemView);
 

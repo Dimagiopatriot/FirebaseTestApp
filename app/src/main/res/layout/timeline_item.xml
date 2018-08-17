@@ -33,6 +33,7 @@
                 android:textColor="@color/colorTextBlue"
                 android:textSize="22sp"
                 tools:text="2:20" />
+
             <TextView
                 android:id="@+id/afternoon"
                 android:layout_width="wrap_content"

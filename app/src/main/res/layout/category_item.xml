@@ -84,6 +84,6 @@
         android:layout_height="1dp"
         android:layout_below="@id/settings"
         android:layout_marginTop="15dp"
-        android:background="@color/colorProfileDivider"/>
+        android:background="@color/colorProfileDivider" />
 
 </RelativeLayout>

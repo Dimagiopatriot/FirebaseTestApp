@@ -16,7 +16,6 @@ import com.sdmitriy.firebasetestapp.model.entity.secondpart.CarouselItem;
 import com.sdmitriy.firebasetestapp.model.entity.secondpart.CategoryItem;
 import com.sdmitriy.firebasetestapp.model.entity.secondpart.TimelineItem;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

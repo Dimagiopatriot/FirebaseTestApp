@@ -3,7 +3,7 @@ package com.sdmitriy.firebasetestapp.model.entity;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Place implements Parcelable{
+public class Place implements Parcelable {
 
     public Place() {
     }

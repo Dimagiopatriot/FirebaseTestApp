@@ -24,10 +24,10 @@
             android:id="@+id/screen_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorWhite"
+            android:layout_gravity="center"
             android:fontFamily="@font/montserrat"
-            android:textSize="16sp"
-            android:layout_gravity="center" />
+            android:textColor="@color/colorWhite"
+            android:textSize="16sp" />
 
     </android.support.v7.widget.Toolbar>
 

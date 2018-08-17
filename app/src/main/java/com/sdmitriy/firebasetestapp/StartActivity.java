@@ -1,9 +1,8 @@
 package com.sdmitriy.firebasetestapp;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.Toast;
+import android.support.v7.app.AppCompatActivity;
 
 import com.sdmitriy.firebasetestapp.util.Utils;
 
@@ -20,9 +19,9 @@ public class StartActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.part_one_button)
-    public void goToPartOne(){
+    public void goToPartOne() {
         Intent intent;
-        if (Utils.isUserLoggedOn(this)){
+        if (Utils.isUserLoggedOn(this)) {
             intent = new Intent(this, PartOneActivity.class);
         } else {
             intent = new Intent(this, LoginActivity.class);

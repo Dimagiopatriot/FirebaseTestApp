@@ -50,8 +50,8 @@
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="21dp"
-            android:layout_toRightOf="@id/ic_like"
             android:layout_toEndOf="@id/ic_like"
+            android:layout_toRightOf="@id/ic_like"
             android:text="15 likes"
             android:textColor="@color/colorTextGrey" />
 
@@ -60,9 +60,9 @@
             android:layout_width="17dp"
             android:layout_height="16dp"
             android:layout_below="@id/article_name"
-            android:layout_marginTop="23dp"
             android:layout_marginLeft="26dp"
             android:layout_marginStart="26dp"
+            android:layout_marginTop="23dp"
             android:layout_toEndOf="@id/likes"
             android:layout_toRightOf="@id/likes"
             android:src="@drawable/ic_comment" />

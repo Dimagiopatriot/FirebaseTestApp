@@ -3,7 +3,6 @@ package com.sdmitriy.firebasetestapp.model.entity;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.maps.android.clustering.ClusterItem;
 import com.sdmitriy.firebasetestapp.R;
 
 /**

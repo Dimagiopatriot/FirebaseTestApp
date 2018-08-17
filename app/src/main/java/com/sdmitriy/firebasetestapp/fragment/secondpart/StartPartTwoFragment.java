@@ -86,7 +86,9 @@ public class StartPartTwoFragment extends Fragment {
 
     public interface ToolbarManager {
         void changeNavigationIcon(int iconDrawable);
+
         void disableNavigationIcon();
+
         void setTitle(String title);
     }
 }

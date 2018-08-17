@@ -15,11 +15,9 @@ import android.view.ViewGroup;
 import com.sdmitriy.firebasetestapp.R;
 import com.sdmitriy.firebasetestapp.model.adapter.secondpart.CategoryPagerAdapter;
 import com.sdmitriy.firebasetestapp.model.adapter.secondpart.HotNewsFeedPagerAdapter;
-import com.sdmitriy.firebasetestapp.model.entity.secondpart.CategoryItem;
 import com.sdmitriy.firebasetestapp.model.entity.secondpart.CategoryTabItem;
 import com.sdmitriy.firebasetestapp.model.entity.secondpart.HotNewsTabItem;
 import com.sdmitriy.firebasetestapp.model.entity.secondpart.ViewPagerAdapterItem;
-import com.sdmitriy.firebasetestapp.util.Utils;
 
 import java.util.ArrayList;
 import java.util.List;

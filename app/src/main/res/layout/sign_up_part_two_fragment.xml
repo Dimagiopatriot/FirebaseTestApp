@@ -26,9 +26,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="82dp"
+                android:fontFamily="@font/montserrat"
                 android:text="@string/sign_up"
                 android:textColor="@color/colorWhite"
-                android:fontFamily="@font/montserrat"
                 android:textSize="29sp" />
 
             <TextView
@@ -104,8 +104,8 @@
                 android:layout_marginRight="33dp"
                 android:layout_marginStart="33dp"
                 android:background="@drawable/sing_up_button"
-                android:textAllCaps="false"
                 android:text="@string/next"
+                android:textAllCaps="false"
                 android:textColor="@color/colorWhite" />
 
             <LinearLayout
